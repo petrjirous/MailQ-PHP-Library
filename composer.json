@@ -1,0 +1,22 @@
+{
+	"name": "mailq/connector",
+	"description": "Nette RobotLoader: comfortable autoloading",
+	"homepage": "http://mailq.cz",
+	"license": ["BSD-3-Clause", "GPL-2.0", "GPL-3.0"],
+	"authors": [
+		{
+			"name": "Quanti s.r.o.",
+			"homepage": "http://quanti.cz"
+		}
+	],
+	"require": {
+		"php": ">=5.5.0",
+		"nette/robot-loader": "2.3.1",
+		"nette/utils": "2.2",
+		"nette/reflection": "2.2"
+	},
+	"autoload": {
+		"classmap": ["src/"]
+	},
+	"minimum-stability": "dev"
+}
