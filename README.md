@@ -1,7 +1,6 @@
 # MailQ PHP library
 
 ## Usage
-
 There is MailQ object which is facade to whole MailQ REST API. Most common use case is only one company in MailQ per customer. You need to instantiate MailQ object with company ID. Because there are also customers with multiple companies there is MailQFactory which creates MailQ for specific company.
  
 ```php
