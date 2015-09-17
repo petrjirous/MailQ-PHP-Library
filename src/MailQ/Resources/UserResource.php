@@ -8,17 +8,16 @@ use MailQ\Request;
 use Nette\Utils\Json;
 use stdClass;
 
-class UserResource  extends BaseResource{
+trait UserResource {
     
     
 
     
     /**
-     * @param type $companyId
      * @return UsersEntity
      */
-    public function getUsers($companyId = null) {
-        $request = Request::get("{$this->getConnector()->getCompanyId($companyId)}/users");
+    public function getUsers() {
+        $request = Request::get("{$this->getCompanyId()}/users");
         $response = $this->getConnector()->sendRequest($request);
         $data = Json::decode($response->getContent());
         $json = new stdClass();
@@ -28,12 +27,12 @@ class UserResource  extends BaseResource{
     
    
     /**
-     * @param type $userId
-     * @param type $companyId
+     * 
+     * @param integer $userId
      * @return UserEntity
      */
-    public function getUser($userId,$companyId = null) {
-        $request = Request::get("{$this->getConnector()->getCompanyId($companyId)}/users/{$userId}");
+    public function getUser($userId) {
+        $request = Request::get("{$this->getCompanyId()}/users/{$userId}");
         $response = $this->getConnector()->sendRequest($request);
         return new UserEntity($response->getContent());
     }

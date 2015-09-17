@@ -6,11 +6,13 @@ class LinkEntity extends \MailQ\Entities\BaseEntity {
     
     /**
      * @in
+     * @out
      * @var string 
      */
     private $id;
     /**
      * @in
+     * @out
      * @var string  
      */
     private $link;

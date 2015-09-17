@@ -6,24 +6,24 @@ use MailQ\Entities\v2\ApiKeyEntity;
 use MailQ\Entities\v2\CompanyEntity;
 use MailQ\Request;
 
-class CompanyResource extends BaseResource {
+trait CompanyResource {
     
     /**
-     * @param type $companyId
-     * @return \MailQ\Entities\CompanyEntity
+     * 
+     * @return CompanyEntity
      */
-    public function getCompany($companyId = null) {
-        $request = Request::get("{$this->getConnector()->getCompanyId($companyId)}");
+    public function getCompany() {
+        $request = Request::get("{$this->getCompanyId()}");
         $response = $this->getConnector()->sendRequest($request);
         return new CompanyEntity($response->getContent());
     }
     
     /**
-     * @param type $companyId
-     * @return string New API key
+     * 
+     * @return string API key
      */
-    public function regenerateApiKey($companyId = null) {
-        $request = Request::put("{$this->getConnector()->getCompanyId($companyId)}");
+    public function regenerateApiKey() {
+        $request = Request::put("{$this->getCompanyId()}");
         $response = $this->getConnector()->sendRequest($request);
         $apiKeyEntity = new ApiKeyEntity($response->getContent());
         return $apiKeyEntity->getApiKey();

@@ -6,12 +6,19 @@ class Connector {
     
     private $apiKey;
     private $baseUrl;
-    private $defaultCompanyId;
+    
+    private static $instance;
 
-    function __construct($baseUrl,$apiKey,$defaultCompanyId) {
+    function __construct($baseUrl,$apiKey) {
         $this->baseUrl = $baseUrl;
         $this->apiKey = $apiKey;
-        $this->defaultCompanyId = $defaultCompanyId;
+    }
+    
+    public static function getInstance($baseUrl,$apiKey) {
+        if (!isset(self::$instance)) {
+            self::$instance = new Connector($baseUrl, $apiKey);
+        }
+        return self::$instance;
     }
 
     /**
@@ -20,10 +27,14 @@ class Connector {
      */
     private $headers;
 
+    /**
+     * 
+     * @param \MailQ\Request $request
+     * @return \MailQ\Response
+     */
     public function sendRequest(Request $request) {
         $ch = curl_init();
         $curlHeaders = $this->createCurlHeaders(array_merge($request->getHeaders(),$this->createDefaultHeaders()));
-        //die(var_dump($this->baseUrl.'/companies/'.$request->getPath()));
         $url = $this->baseUrl.'/companies/'.$request->getPath();
         if ($request->hasParameters()) {
             $url = '?'.http_build_query($request->getParameters());
@@ -44,6 +55,17 @@ class Connector {
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, Request::HTTP_METHOD_PUT);
         }
         $response = curl_exec($ch);
+        curl_close($ch);
+        return $this->createResponse($ch,$response);
+    }
+    
+    /**
+     * 
+     * @param type $ch
+     * @param string $response
+     * @return Response
+     */
+    private function createResponse($ch,$response) {
         $responseData = new \Response();
         $responseData->setHttpCode(curl_getinfo($ch, CURLINFO_HTTP_CODE));
         if ($responseData->isOk()) {
@@ -56,7 +78,6 @@ class Connector {
         }
         $responseData->setHeaders($this->headers);
         $responseData->setHttpCode(curl_getinfo($ch, CURLINFO_HTTP_CODE));
-        curl_close($ch);
         return $responseData;
     }
     
@@ -100,12 +121,4 @@ class Connector {
         return $curlHeaders;
     }
     
-    public function getCompanyId($companyId = null) {
-        if ($companyId != null) {
-            return $companyId;
-        }
-        else {
-            return $this->defaultCompanyId;
-        }
-    }
 }

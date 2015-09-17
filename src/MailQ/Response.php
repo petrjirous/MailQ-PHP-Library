@@ -1,5 +1,6 @@
 <?php
 
+namespace MailQ;
 
 class Response {
     
@@ -18,7 +19,9 @@ class Response {
      * @var type 
      */
     private $headers;
-
+    
+    private $createdId;
+    
     function getContent() {
         return $this->content;
     }
@@ -41,8 +44,18 @@ class Response {
 
     function setHeaders($headers) {
         $this->headers = $headers;
+        if (isset($this->headers) && isset($this->headers["Location"])) {
+            $location = $this->headers["Location"];
+            $locationParts = explode("/", $location);
+            $this->createdId = $locationParts[count($locationParts)-1];
+        }
     }
     
+    public function getCreatedId() {
+        return $this->createdId;
+    }
+
+        
     function isOk() {
         $code = intval($this->httpCode);
         return 300 >  $code && $code  >= 200;
@@ -50,6 +63,10 @@ class Response {
     
     function isNoContent() {
         return intval($this->httpCode) == 204;
+    }
+    
+    function isCreated() {
+        return intval($this->httpCode) == 201;
     }
 
 

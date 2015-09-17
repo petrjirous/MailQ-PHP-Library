@@ -6,22 +6,31 @@ class AttachmentEntity extends \MailQ\Entities\BaseEntity {
     
     /**
      * @in
+     * @out
      * @var string 
      */
     private $displayName;
     /**
      * @in
+     * @out
      * @var string  
      */
     private $link;
     
     /**
      * @in
+     * @out
      * @var string  
      */
     private $mimeType;
     
-    
+    /**
+     * @in
+     * @out
+     * @var string  
+     */
+    private $source;
+      
     public function getDisplayName() {
         return $this->displayName;
     }
@@ -45,6 +54,16 @@ class AttachmentEntity extends \MailQ\Entities\BaseEntity {
     public function setMimeType($mimeType) {
         $this->mimeType = $mimeType;
     }
+    
+    public function getSource() {
+        return $this->source;
+    }
+
+    public function setSource($source) {
+        $this->source = $source;
+    }
+
+
 
 
 

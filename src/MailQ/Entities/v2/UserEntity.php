@@ -6,28 +6,7 @@ use MailQ\Entities\BaseEntity;
 
 class UserEntity extends BaseEntity{
     
-    /**
-     * 
-     * "id": 1, 
-        "username": "john.snow@gmail.com",
-        "forename": "John",
-        "surname": "Snow",
-        "phone": "134-567-891",
-        "email": "js@company.com",
-        "position": "Manager",
-        "testEmail": "john.test@gmail.com",
-        "companies": [
-            {
-                "id": 1,
-                "link": "https://www.mailq.quanti.cz/api/v2/companies/1"
-            },
-            {
-                "id": 2,
-                "link": "https://www.mailq.quanti.cz/api/v2/companies/2"
-            }
-        ]
-     */
-    
+
     /**
      * @in
      * @out

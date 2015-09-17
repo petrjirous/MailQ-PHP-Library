@@ -4,21 +4,19 @@ namespace MailQ\Resources;
 
 use MailQ\Entities\v2\SenderEmailEntity;
 use MailQ\Entities\v2\SenderEmailsEntity;
-use MailQ\Entities\v2\UserEntity;
-use MailQ\Entities\v2\UsersEntity;
 use MailQ\Request;
 use Nette\Utils\Json;
 use stdClass;
 
-class SenderEmailResource extends BaseResource{
+trait SenderEmailResource {
     
     
     /**
-     * @param type $companyId
-     * @return UsersEntity
+     * 
+     * @return SenderEmailsEntity
      */
-    public function getSenderEmails($companyId = null) {
-        $request = Request::get("{$this->getConnector()->getCompanyId($companyId)}/sender-emails");
+    public function getSenderEmails() {
+        $request = Request::get("{$this->getCompanyId()}/sender-emails");
         $response = $this->getConnector()->sendRequest($request);
         $data = Json::decode($response->getContent());
         $json = new stdClass();
@@ -28,12 +26,12 @@ class SenderEmailResource extends BaseResource{
     
    
     /**
-     * @param type $senderEmailId
-     * @param type $companyId
-     * @return UserEntity
+     * 
+     * @param integer $senderEmailId
+     * @return SenderEmailEntity
      */
-    public function getSenderEmail($senderEmailId,$companyId = null) {
-        $request = Request::get("{$this->getConnector()->getCompanyId($companyId)}/sender-emails/{$senderEmailId}");
+    public function getSenderEmail($senderEmailId) {
+        $request = Request::get("{$this->getCompanyId()}/sender-emails/{$senderEmailId}");
         $response = $this->getConnector()->sendRequest($request);
         return new SenderEmailEntity($response->getContent());
     }

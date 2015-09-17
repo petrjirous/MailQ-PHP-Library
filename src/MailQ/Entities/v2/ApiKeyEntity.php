@@ -8,12 +8,14 @@ class ApiKeyEntity extends BaseEntity {
 
     /**
      * @in
+     * @out
      * @var integer 
      */
     private $id;
    
     /**
      * @in
+     * @out
      * @var integer 
      */
     private $apiKey;

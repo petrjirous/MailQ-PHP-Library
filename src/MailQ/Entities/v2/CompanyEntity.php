@@ -8,37 +8,44 @@ class CompanyEntity extends BaseEntity {
 
     /**
      * @in
+     * @out
      * @var integer 
      */
     private $id;
     /**
      * @in
+     * @out
      * @var string 
      */
     private $name;
     /**
      * @in
+     * @out
      * @var string 
      */
     private $apiKey;
     /**
      * @in
+     * @out
      * @var string 
      */
     private $defaultSendAs;
     /**
      * @in
+     * @out
      * @var string 
      */
     private $defaultSenderEmail;
     /**
      * @in
+     * @out
      * @var LinkEntity
      * @collection
      */
     private $users;
     /**
      * @in
+     * @out
      * @var LinkEntity
      * @collection
      */
@@ -46,6 +53,7 @@ class CompanyEntity extends BaseEntity {
 
     /**
      * @in
+     * @out
      * @var LinkEntity
      * @collection
      */

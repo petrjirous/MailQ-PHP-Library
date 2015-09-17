@@ -27,10 +27,6 @@ class BaseEntity extends \Nette\Object {
                 $data = Json::decode($data);
             }
             $this->initMapping($inverse ? 'out' : 'in');
-            if ($data instanceof \stdClass) {
-                $this->validate($data);
-                $data = (array) $data;
-            }
             foreach ($data as $key => $value) {
                 if ($value instanceof \stdClass) {
                     $value = (array) $value;
@@ -57,35 +53,6 @@ class BaseEntity extends \Nette\Object {
                         }
                     }
                 }
-            }
-        }
-    }
-
-    private function validate($data) {
-        $reflection = $this->getReflection();
-        if ($reflection->hasAnnotation('validate')) {
-            $annotation = $reflection->getAnnotation('validate');
-            if ($annotation !== true) {
-                $schemaFile = $annotation->schema;
-            } else {
-                $schemaFile = $reflection->getShortName() . '.json';
-            }
-            $retriever = new UriRetriever;
-            $filePath = __DIR__ . '/Schema/' . $schemaFile;
-            $path = realpath($filePath);
-            if ($path) {
-                $schema = $retriever->retrieve('file://' . $path);
-                $validator = new Validator();
-                $validator->check($data, $schema);
-                if (!$validator->isValid()) {
-                    $message = "JSON is not valid. Violations:\n";
-                    foreach ($validator->getErrors() as $error) {
-                        $message .= sprintf("[%s] %s\n", $error['property'], $error['message']);
-                    }
-                    throw new ApiException($message, 400);
-                }
-            } else {
-                throw new ApiException("Cannot find validation schema {$schemaFile}.", IResponse::S500_INTERNAL_SERVER_ERROR);
             }
         }
     }

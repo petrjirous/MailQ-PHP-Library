@@ -2,20 +2,80 @@
 
 namespace MailQ\Resources;
 
-use MailQ\Entities\v2\ApiKeyEntity;
+use MailQ\Entities\v2\NewsletterEntity;
 use MailQ\Entities\v2\NewslettersEntity;
 use MailQ\Request;
 use Nette\Utils\Json;
 use stdClass;
 
-class NewsletterResource extends BaseResource {
+trait NewsletterResource {
     
     /**
-     * @param type $companyId
+     * 
+     * @param type $newsletterId
+     */
+    public function startNewsletter($newsletterId) {
+        $request = Request::put("{$this->getCompanyId()}/newsletters/{$newsletterId}/preparation");
+        $command = new \MailQ\Entities\v2\NewsletterCommandEntity();
+        $command->setStart(true);
+        $request->setContentAsEntity($command);
+        $this->getConnector()->sendRequest($request);
+    }
+    
+    /**
+     * 
+     * @param integer $newsletterId
+     */
+    public function stopNewsletter($newsletterId) {
+        $request = Request::put("{$this->getCompanyId()}/newsletters/{$newsletterId}/preparation");
+        $command = new \MailQ\Entities\v2\NewsletterCommandEntity();
+        $command->setStop(true);
+        $request->setContentAsEntity($command);
+        $this->getConnector()->sendRequest($request);
+    }
+    
+    /**
+     * @param string $emai
+     * @param integer $newsletterId
+     */
+    public function sendTestEmail($email,$newsletterId) {
+        $request = Request::post("{$this->getCompanyId()}/newsletters/{$newsletterId}/test-email");
+        $emailAddress = new \MailQ\Entities\v2\EmailAddressEntity();
+        $emailAddress->setEmail($email);
+        $request->setContentAsEntity($emailAddress);
+        $this->getConnector()->sendRequest($request);
+    }
+    
+    /**
+     * 
+     * @param NewsletterEntity $newsletter
+     * @return NewsletterEntity
+     */
+    public function createNewsletter(NewsletterEntity $newsletter) {
+        $request = Request::post("{$this->getCompanyId()}/newsletters");
+        $request->setContentAsEntity($newsletter);
+        $response = $this->getConnector()->sendRequest($request);
+        $newsletter->setId($response->getCreatedId());
+        return $newsletter;
+    }
+    
+    /**
+     * 
+     * @param NewsletterEntity $newsletter
+     * @return NewsletterEntity
+     */
+    public function updateNewsletter(NewsletterEntity $newsletter) {
+        $request = Request::put("{$this->getCompanyId()}/newsletters/{$newsletter->getId()}");
+        $request->setContentAsEntity($newsletter);
+        $this->getConnector()->sendRequest($request);
+    }
+    
+    /**
+     * 
      * @return NewslettersEntity
      */
-    public function getNewsletters($companyId = null) {
-        $request = Request::get("{$this->getConnector()->getCompanyId($companyId)}/newsletters");
+    public function getNewsletters() {
+        $request = Request::get("{$this->getCompanyId()}/newsletters");
         $response = $this->getConnector()->sendRequest($request);
         $data = Json::decode($response->getContent());
         $json = new stdClass();
@@ -24,13 +84,14 @@ class NewsletterResource extends BaseResource {
     }
     
     /**
-     * @param type $companyId
-     * @return string New API key
+     * 
+     * @param integer $newsletterId
+     * @return NewsletterEntity
      */
-    public function getNewsletter($newsletterId,$companyId = null) {
-        $request = Request::get("{$this->getConnector()->getCompanyId($companyId)}/newsletters/{$newsletterId}");
+    public function getNewsletter($newsletterId) {
+        $request = Request::get("{$this->getCompanyId()}/newsletters/{$newsletterId}");
         $response = $this->getConnector()->sendRequest($request);
-        return new \MailQ\Entities\v2\NewsletterEntity($response->getContent());
+        return new NewsletterEntity($response->getContent());
     }
     
 }

@@ -7,7 +7,8 @@ use MailQ\Entities\BaseEntity;
 class UnsubscribersEntity extends BaseEntity{
     
     /**
-     *
+     * @in
+     * @out
      * @var UnsubscriberEntity
      * @collection
      */
