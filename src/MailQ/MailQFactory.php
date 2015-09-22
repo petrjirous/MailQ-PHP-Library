@@ -17,6 +17,10 @@ class MailQFactory {
     }
     
     
+    /**
+     * @param type $companyId
+     * @return MailQ
+     */
     public function createMailQ($companyId) {
         $connector = Connector::getInstance($this->baseUrl, $this->apiKey);
         return new MailQ($connector,$companyId);

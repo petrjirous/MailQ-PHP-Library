@@ -17,12 +17,15 @@ trait SmsNotificationResource {
     /**
      * 
      * @param SmsEntity $smsEntity
-     * @param integer $smsNotificationId
+     * @param type $smsNotificationId
+     * @return SmsEntity
      */
     public function sendSms(SmsEntity $smsEntity,$smsNotificationId) {
         $request = Request::post("{$this->getCompanyId()}/sms-notifications/{$smsNotificationId}/data");
         $request->setContentAsEntity($smsEntity);
-        $this->getConnector()->sendRequest($request);
+        $response = $this->getConnector()->sendRequest($request);
+        $smsEntity->setId($response->getCreatedId());
+        return $smsEntity;
     }
     
     /**
@@ -60,7 +63,7 @@ trait SmsNotificationResource {
      * @param SmsNotificationEntity $smsNotification
      */
     public function updateSmsNotification(SmsNotificationEntity $smsNotification) {
-        $request = Request::post("{$this->getCompanyId()}/sms-notifications/{$smsNotification->getId()}");
+        $request = Request::put("{$this->getCompanyId()}/sms-notifications/{$smsNotification->getId()}");
         $request->setContentAsEntity($smsNotification);
         $this->getConnector()->sendRequest($request);
     }

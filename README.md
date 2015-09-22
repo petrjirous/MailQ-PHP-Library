@@ -12,19 +12,26 @@ $mailq = $mailqFactory = $factory->createMailQ($companyId);
 ```
 
 
-### Campaign resource
+### [Campaign resource](http://docs.newmailing.apiary.io/#campaigns)
 
-http://docs.newmailing.apiary.io/#campaigns
 
-#### Get all campaings
+
+#### Get all campaigns
 
 ```php
-$mailq->get
+$campaigns = $mailq->getCampaigns();
 ```
 
-### Company resource
+#### Get single campaign
 
-http://docs.newmailing.apiary.io/#companies
+```php
+$campaignId = 1;
+$campaigns = $mailq->getCampaign();
+```
+
+### [Company resource](http://docs.newmailing.apiary.io/#companies)
+
+
 
 #### Get company
 
@@ -40,7 +47,7 @@ Use this with caution! After regenerating API key application will throw errors 
 $apiKey = $mailq->regenerateApiKey();
 ```
 
-### Log message resource
+### [Log message resource](http://docs.newmailing.apiary.io/#logmessages)
 
 #### Get all log messages
 
@@ -55,7 +62,7 @@ $logMessageId = 1;
 $logMessageEntity = $mailq->getLogMessage($logMessageId);
 ```
 
-### Newsletter resource
+### [Newsletter resource](http://docs.newmailing.apiary.io/#newsletters)
 
 #### Create newsletter
 
@@ -138,7 +145,7 @@ $newsletterId = 1;
 $mailq->stopNewsletter($newsletterId);
 ```
 
-### Notification resource
+### [Notification resource](http://docs.newmailing.apiary.io/#notifications)
 
 #### Create notification
 
@@ -234,7 +241,7 @@ $notificationsData = $mailq->getNotificationsData($notificationId,$email);
 ```
 
 
-### Recipients list resource
+### [Recipients list resource](http://docs.newmailing.apiary.io/#recipientslist)
 
 #### Create recipients list
 
@@ -328,7 +335,7 @@ $unsubscribers = $mailq->getRecipientListUnsubscribers($recipientsListId);
 
 ```php
 $recipientsListId = 1;
-$email = recipient@example.org";
+$email = "recipient@example.org";
 $mailq->addRecipientListUnsubscriber($emails,$recipientsListId);
 ```
 
@@ -354,6 +361,129 @@ $mailq->addRecipientListUnsubscribers($emails,$recipientsListId);
 
 ```php
 $recipientsListId = 1;
-$email = recipient@example.org";
+$email = "recipient@example.org";
 $mailq->deleteRecipientListUnsubscriber($emails,$recipientsListId);
+```
+
+### [SMS Notifications](http://docs.newmailing.apiary.io/#smsnotifications)
+
+### Create single SMS notification
+
+
+```php
+$data = [
+	"name" => "SMS notification",
+    "code" => "S1",
+    "template" => "U01TIHRlc3Qge3t2YXJpYWJsZX19"
+];
+$smsNotification = new SmsNotificationEntity($data);
+$mailq->createSmsNotification($smsNotification);
+$smsNotificationId = $smsNotification->getId();
+```
+
+### Update single SMS notification
+
+
+```php
+$data = [
+	"name" => "SMS notification",
+    "code" => "S1",
+    "template" => "U01TIHRlc3Qge3t2YXJpYWJsZX19"
+];
+$smsNotification = new SmsNotificationEntity($data);
+$mailq->updateSmsNotification($smsNotification);
+```
+
+### Delete SMS notification
+
+```php
+$smsNotificationId = 1;
+$mailq->deleteSmsNotification($smsNotification);
+```
+
+#### Get all SMS notifications
+
+```php
+$notifications = $mailq->getSmsNotifications();
+```
+
+#### Get single SMS notification
+
+```php
+$smsNotificationId = 1;
+$notifications = $mailq->getSmsNotification($smsNotificationId);
+```
+
+#### Send SMS
+
+```php
+$smsNotificationId = 1;
+$data = [
+	"toNumber" => "+420123456789",
+    "data" => [
+        "key1" => "value1", 
+        "key2" => "value2"
+    ]
+];
+$sms = new SmsEntity($data);
+$mailq->sendSms($sms,$smsNotificationId);
+$smsId = $sms->getId();
+```
+
+#### Send SMS batch
+
+```php
+$smsNotificationId = 1;
+$data = [
+	"batch" => [
+        [    
+            "id": 1,
+            "toNumber": "+420123456789", 
+            "data": [         
+                "text": "value1"   
+            ]
+        ],
+        [     
+            "id": 2,
+            "toNumber": "+420123456789", 
+            "data": [        
+                "text": "value2"   
+            ]
+        ]
+
+    ]
+];
+$smsBatch = new SmsBatchEntity($data);
+$smsBatchResultEntity = $mailq->sendSmsBatch($smsBatch,$smsNotificationId);
+```
+
+
+### [Sender emails](http://docs.newmailing.apiary.io/#senderemails)
+
+#### Get all sender emails
+
+```php
+$senderEmails = $mailq->getSenderEmails();
+```
+
+#### Get single sender email
+
+```php
+$senderEmailId = 1;
+$senderEmail = $mailq->getSenderEmail($senderEmailId);
+```
+
+### [Users](http://docs.newmailing.apiary.io/#users)
+
+#### Get all users
+
+```php
+$users = $mailq->getUsers();
+```
+
+#### Get single user
+
+```php
+$userId = 1;
+$user = $mailq->getUser($userId);
 ```

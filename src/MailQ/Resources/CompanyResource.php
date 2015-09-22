@@ -6,7 +6,7 @@ use MailQ\Entities\v2\ApiKeyEntity;
 use MailQ\Entities\v2\CompanyEntity;
 use MailQ\Request;
 
-trait CompanyResource {
+trait CampaignResource {
     
     /**
      * 

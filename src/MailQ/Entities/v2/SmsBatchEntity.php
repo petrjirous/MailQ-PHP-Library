@@ -24,9 +24,4 @@ class SmsBatchEntity extends BaseEntity {
         $this->batch = $batch;
     }
 
-
-
-
-
-
 }

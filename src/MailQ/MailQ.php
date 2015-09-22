@@ -39,6 +39,10 @@ class MailQ  {
         $this->companyId = $companyId;
     }
 
+    /**
+     * 
+     * @return Connector
+     */
     protected function getConnector() {
         return $this->connector;
     }
