@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>MailQ PHP library by QuantiCZ</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">MailQ PHP library</h1>
+      <h2 class="project-tagline">PHP library for MailQ REST API</h2>
+      <a href="https://github.com/QuantiCZ/MailQ-PHP-Library" class="btn">View on GitHub</a>
+      <a href="https://github.com/QuantiCZ/MailQ-PHP-Library/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/QuantiCZ/MailQ-PHP-Library/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="mailq-php-library" class="anchor" href="#mailq-php-library" aria-hidden="true"><span class="octicon octicon-link"></span></a>MailQ PHP library</h1>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>There is MailQ object which is facade to whole MailQ REST API. Most common use case is only one company in MailQ per customer. You need to instantiate MailQ object with company ID. Because there are also customers with multiple companies there is MailQFactory which creates MailQ for specific company.</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$apiKey</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>6e2211bf472a9478f03420fb5897e324c57d05fc27bc0e871083275e98eec344<span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1"><span class="pl-smi">$apiUrl</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>http://mailq-test.quanti.cz/api/v2<span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1"><span class="pl-smi">$mailqFactory</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-c1">MailQFactory</span>(<span class="pl-smi">$apiUrl</span>,<span class="pl-smi">$apiKey</span>);</span>
+<span class="pl-s1"><span class="pl-smi">$companyId</span> <span class="pl-k">=</span> <span class="pl-c1">1</span>;</span>
+<span class="pl-s1"><span class="pl-smi">$mailq</span> <span class="pl-k">=</span> <span class="pl-smi">$mailqFactory</span> <span class="pl-k">=</span> <span class="pl-smi">$factory</span><span class="pl-k">-&gt;</span>createMailQ(<span class="pl-smi">$companyId</span>);</span></pre></div>
+
+<h3>
+<a id="campaign-resource" class="anchor" href="#campaign-resource" aria-hidden="true"><span class="octicon octicon-link"></span></a>Campaign resource</h3>
+
+<p><a href="http://docs.newmailing.apiary.io/#campaigns">http://docs.newmailing.apiary.io/#campaigns</a></p>
+
+<h4>
+<a id="get-all-campaings" class="anchor" href="#get-all-campaings" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get all campaings</h4>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$mailq</span><span class="pl-k">-&gt;</span><span class="pl-smi">get</span></span></pre></div>
+
+<h3>
+<a id="company-resource" class="anchor" href="#company-resource" aria-hidden="true"><span class="octicon octicon-link"></span></a>Company resource</h3>
+
+<p><a href="http://docs.newmailing.apiary.io/#companies">http://docs.newmailing.apiary.io/#companies</a></p>
+
+<h4>
+<a id="get-company" class="anchor" href="#get-company" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get company</h4>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$company</span> <span class="pl-k">=</span> <span class="pl-smi">$mailq</span><span class="pl-k">-&gt;</span>getCompany();</span></pre></div>
+
+<h4>
+<a id="regenerate-api-key" class="anchor" href="#regenerate-api-key" aria-hidden="true"><span class="octicon octicon-link"></span></a>Regenerate API key</h4>
+
+<p>Use this with caution! After regenerating API key application will throw errors because you have already create connection </p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$apiKey</span> <span class="pl-k">=</span> <span class="pl-smi">$mailq</span><span class="pl-k">-&gt;</span>regenerateApiKey();</span></pre></div>
+
+<h3>
+<a id="log-message-resource" class="anchor" href="#log-message-resource" aria-hidden="true"><span class="octicon octicon-link"></span></a>Log message resource</h3>
+
+<h4>
+<a id="get-all-log-messages" class="anchor" href="#get-all-log-messages" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get all log messages</h4>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$logMessagesEntity</span> <span class="pl-k">=</span> <span class="pl-smi">$mailq</span><span class="pl-k">-&gt;</span>getLogMessages();</span></pre></div>
+
+<h4>
+<a id="get-single-log-message" class="anchor" href="#get-single-log-message" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get single log message</h4>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$logMessageId</span> <span class="pl-k">=</span> <span class="pl-c1">1</span>;</span>
+<span class="pl-s1"><span class="pl-smi">$logMessageEntity</span> <span class="pl-k">=</span> <span class="pl-smi">$mailq</span><span class="pl-k">-&gt;</span>getLogMessage(<span class="pl-smi">$logMessageId</span>);</span></pre></div>
+
+<h3>
+<a id="newsletter-resource" class="anchor" href="#newsletter-resource" aria-hidden="true"><span class="octicon octicon-link"></span></a>Newsletter resource</h3>
+
+<h4>
+<a id="create-newsletter" class="anchor" href="#create-newsletter" aria-hidden="true"><span class="octicon octicon-link"></span></a>Create newsletter</h4>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$data</span> <span class="pl-k">=</span> [</span>
+<span class="pl-s1">    <span class="pl-s"><span class="pl-pds">"</span>name<span class="pl-pds">"</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">"</span>Awesome newsletter<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s1">     <span class="pl-s"><span class="pl-pds">"</span>campaign<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>Spring 2016<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s1">     <span class="pl-s"><span class="pl-pds">"</span>subject<span class="pl-pds">"</span></span> : <span class="pl-s"><span class="pl-pds">"</span>Buy our new product<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s1">     <span class="pl-s"><span class="pl-pds">"</span>senderEmail<span class="pl-pds">"</span></span> : <span class="pl-s"><span class="pl-pds">"</span>newsletter@example.org<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s1">     <span class="pl-s"><span class="pl-pds">"</span>sendAs<span class="pl-pds">"</span></span> : <span class="pl-s"><span class="pl-pds">"</span>Awesome Company<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s1">     <span class="pl-s"><span class="pl-pds">"</span>from<span class="pl-pds">"</span></span> : <span class="pl-s"><span class="pl-pds">"</span>2015-06-12T06:00:00.000<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s1">     <span class="pl-s"><span class="pl-pds">"</span>to<span class="pl-pds">"</span></span> : <span class="pl-s"><span class="pl-pds">"</span>2016-06-19T06:00:00.000<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s1">     <span class="pl-s"><span class="pl-pds">"</span>text<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>QWx0ZXJuYXRpdmUgYmFzZTY0IGVtYWlsIHRleHQ=<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s1">     <span class="pl-s"><span class="pl-pds">"</span>automaticTime<span class="pl-pds">"</span></span>: <span class="pl-c1">false</span>,</span>
+<span class="pl-s1">     <span class="pl-s"><span class="pl-pds">"</span>recipientsListId<span class="pl-pds">"</span></span>: <span class="pl-c1">1</span>,</span>
+<span class="pl-s1">     <span class="pl-s"><span class="pl-pds">"</span>templateUrl<span class="pl-pds">"</span></span> : <span class="pl-s"><span class="pl-pds">"</span>http://example.org/newsletter.html<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s1">     <span class="pl-s"><span class="pl-pds">"</span>unsubscribeTemplateUrl<span class="pl-pds">"</span></span> : <span class="pl-s"><span class="pl-pds">"</span>http://example.org/unsubscribe.html<span class="pl-pds">"</span></span></span>
+<span class="pl-s1">];</span>
+<span class="pl-s1"><span class="pl-smi">$newsletter</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-c1">NewsletterEntity</span>(<span class="pl-smi">$data</span>);</span>
+<span class="pl-s1"><span class="pl-smi">$mailq</span><span class="pl-k">-&gt;</span>createNewsletter(<span class="pl-smi">$newsletter</span>);</span>
+<span class="pl-s1"><span class="pl-smi">$newsletterId</span> <span class="pl-k">=</span> <span class="pl-smi">$newsletter</span><span class="pl-k">-&gt;</span>getId();</span></pre></div>
+
+<h4>
+<a id="update-newsletter" class="anchor" href="#update-newsletter" aria-hidden="true"><span class="octicon octicon-link"></span></a>Update newsletter</h4>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$data</span> <span class="pl-k">=</span> [</span>
+<span class="pl-s1">    <span class="pl-s"><span class="pl-pds">"</span>name<span class="pl-pds">"</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">"</span>Awesome newsletter<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s1">     <span class="pl-s"><span class="pl-pds">"</span>campaign<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>Spring 2016<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s1">     <span class="pl-s"><span class="pl-pds">"</span>subject<span class="pl-pds">"</span></span> : <span class="pl-s"><span class="pl-pds">"</span>Buy our new product<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s1">     <span class="pl-s"><span class="pl-pds">"</span>senderEmail<span class="pl-pds">"</span></span> : <span class="pl-s"><span class="pl-pds">"</span>newsletter@example.org<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s1">     <span class="pl-s"><span class="pl-pds">"</span>sendAs<span class="pl-pds">"</span></span> : <span class="pl-s"><span class="pl-pds">"</span>Awesome Company<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s1">     <span class="pl-s"><span class="pl-pds">"</span>from<span class="pl-pds">"</span></span> : <span class="pl-s"><span class="pl-pds">"</span>2015-06-12T06:00:00.000<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s1">     <span class="pl-s"><span class="pl-pds">"</span>to<span class="pl-pds">"</span></span> : <span class="pl-s"><span class="pl-pds">"</span>2016-06-19T06:00:00.000<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s1">     <span class="pl-s"><span class="pl-pds">"</span>text<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>QWx0ZXJuYXRpdmUgYmFzZTY0IGVtYWlsIHRleHQ=<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s1">     <span class="pl-s"><span class="pl-pds">"</span>automaticTime<span class="pl-pds">"</span></span>: <span class="pl-c1">false</span>,</span>
+<span class="pl-s1">     <span class="pl-s"><span class="pl-pds">"</span>recipientsListId<span class="pl-pds">"</span></span>: <span class="pl-c1">1</span>,</span>
+<span class="pl-s1">     <span class="pl-s"><span class="pl-pds">"</span>templateUrl<span class="pl-pds">"</span></span> : <span class="pl-s"><span class="pl-pds">"</span>http://example.org/newsletter.html<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s1">     <span class="pl-s"><span class="pl-pds">"</span>unsubscribeTemplateUrl<span class="pl-pds">"</span></span> : <span class="pl-s"><span class="pl-pds">"</span>http://example.org/unsubscribe.html<span class="pl-pds">"</span></span></span>
+<span class="pl-s1">];</span>
+<span class="pl-s1"><span class="pl-smi">$newsletter</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-c1">NewsletterEntity</span>(<span class="pl-smi">$data</span>);</span>
+<span class="pl-s1"><span class="pl-smi">$mailq</span><span class="pl-k">-&gt;</span>updateNewsletter(<span class="pl-smi">$newsletter</span>);</span>
+<span class="pl-s1"><span class="pl-smi">$newsletterId</span> <span class="pl-k">=</span> <span class="pl-smi">$newsletter</span><span class="pl-k">-&gt;</span>getId();</span></pre></div>
+
+<h4>
+<a id="get-all-newsletters" class="anchor" href="#get-all-newsletters" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get all newsletters</h4>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$newsletters</span> <span class="pl-k">=</span> <span class="pl-smi">$mailq</span><span class="pl-k">-&gt;</span>getNewsletters();</span></pre></div>
+
+<h4>
+<a id="get-newsletter" class="anchor" href="#get-newsletter" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get newsletter</h4>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$newsletterId</span> <span class="pl-k">=</span> <span class="pl-c1">1</span>;</span>
+<span class="pl-s1"><span class="pl-smi">$newsletter</span> <span class="pl-k">=</span> <span class="pl-smi">$mailq</span><span class="pl-k">-&gt;</span>getNewsletter(<span class="pl-smi">$newsletterId</span>);</span></pre></div>
+
+<h4>
+<a id="send-test-e-mail" class="anchor" href="#send-test-e-mail" aria-hidden="true"><span class="octicon octicon-link"></span></a>Send test e-mail</h4>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$newsletterId</span> <span class="pl-k">=</span> <span class="pl-c1">1</span>;</span>
+<span class="pl-s1"><span class="pl-smi">$email</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>test@example.org<span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1"><span class="pl-smi">$mailq</span><span class="pl-k">-&gt;</span>sendTestEmail(<span class="pl-smi">$email</span>,<span class="pl-smi">$newsletterId</span>);</span></pre></div>
+
+<h4>
+<a id="start-preparation-of-newsletter" class="anchor" href="#start-preparation-of-newsletter" aria-hidden="true"><span class="octicon octicon-link"></span></a>Start preparation of newsletter</h4>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$newsletterId</span> <span class="pl-k">=</span> <span class="pl-c1">1</span>;</span>
+<span class="pl-s1"><span class="pl-smi">$mailq</span><span class="pl-k">-&gt;</span>startNewsletter(<span class="pl-smi">$newsletterId</span>);</span></pre></div>
+
+<h4>
+<a id="stop-preparation-of-newsletter" class="anchor" href="#stop-preparation-of-newsletter" aria-hidden="true"><span class="octicon octicon-link"></span></a>Stop preparation of newsletter</h4>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$newsletterId</span> <span class="pl-k">=</span> <span class="pl-c1">1</span>;</span>
+<span class="pl-s1"><span class="pl-smi">$mailq</span><span class="pl-k">-&gt;</span>stopNewsletter(<span class="pl-smi">$newsletterId</span>);</span></pre></div>
+
+<h3>
+<a id="notification-resource" class="anchor" href="#notification-resource" aria-hidden="true"><span class="octicon octicon-link"></span></a>Notification resource</h3>
+
+<h4>
+<a id="create-notification" class="anchor" href="#create-notification" aria-hidden="true"><span class="octicon octicon-link"></span></a>Create notification</h4>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$data</span> <span class="pl-k">=</span> [</span>
+<span class="pl-s1">    <span class="pl-s"><span class="pl-pds">"</span>name<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>First Notification<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s1">    <span class="pl-s"><span class="pl-pds">"</span>code<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>N1<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s1">    <span class="pl-s"><span class="pl-pds">"</span>subject<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>{{orderNumber}} order is ready<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s1">    <span class="pl-s"><span class="pl-pds">"</span>sendAs<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>Awesome Company<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s1">    <span class="pl-s"><span class="pl-pds">"</span>text<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>QWx0ZXJuYXRpdmUgYmFzZTY0IGVtYWlsIHRleHQ=<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s1">    <span class="pl-s"><span class="pl-pds">"</span>template<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>QWx0ZXJuYXRpdmUgYmFzZTY0IGVtYWlsIHRleHQ=<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s1">    <span class="pl-s"><span class="pl-pds">"</span>appliedSenderEmail<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>notification@example.org<span class="pl-pds">"</span></span></span>
+<span class="pl-s1">];</span>
+<span class="pl-s1"><span class="pl-smi">$notification</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-c1">NotificationEntity</span>(<span class="pl-smi">$data</span>);</span>
+<span class="pl-s1"><span class="pl-smi">$mailq</span><span class="pl-k">-&gt;</span>createNotification(<span class="pl-smi">$notification</span>);</span>
+<span class="pl-s1"><span class="pl-smi">$notificationId</span> <span class="pl-k">=</span> <span class="pl-smi">$notification</span><span class="pl-k">-&gt;</span>getId();</span></pre></div>
+
+<h4>
+<a id="update-notification" class="anchor" href="#update-notification" aria-hidden="true"><span class="octicon octicon-link"></span></a>Update notification</h4>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$data</span> <span class="pl-k">=</span> [</span>
+<span class="pl-s1">    <span class="pl-s"><span class="pl-pds">"</span>name<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>First Notification<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s1">    <span class="pl-s"><span class="pl-pds">"</span>code<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>N1<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s1">    <span class="pl-s"><span class="pl-pds">"</span>subject<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>{{orderNumber}} order is ready<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s1">    <span class="pl-s"><span class="pl-pds">"</span>sendAs<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>Awesome Company<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s1">    <span class="pl-s"><span class="pl-pds">"</span>text<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>QWx0ZXJuYXRpdmUgYmFzZTY0IGVtYWlsIHRleHQ=<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s1">    <span class="pl-s"><span class="pl-pds">"</span>template<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>QWx0ZXJuYXRpdmUgYmFzZTY0IGVtYWlsIHRleHQ=<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s1">    <span class="pl-s"><span class="pl-pds">"</span>appliedSenderEmail<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>notification@example.org<span class="pl-pds">"</span></span></span>
+<span class="pl-s1">];</span>
+<span class="pl-s1"><span class="pl-smi">$notification</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-c1">NotificationEntity</span>(<span class="pl-smi">$data</span>);</span>
+<span class="pl-s1"><span class="pl-smi">$mailq</span><span class="pl-k">-&gt;</span>updateNotification(<span class="pl-smi">$notification</span>);</span></pre></div>
+
+<h4>
+<a id="get-all-notifications" class="anchor" href="#get-all-notifications" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get all notifications</h4>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$notifications</span> <span class="pl-k">=</span> <span class="pl-smi">$mailq</span><span class="pl-k">-&gt;</span>getNotifications();</span></pre></div>
+
+<h4>
+<a id="delete-notification" class="anchor" href="#delete-notification" aria-hidden="true"><span class="octicon octicon-link"></span></a>Delete notification</h4>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$notificationId</span> <span class="pl-k">=</span> <span class="pl-c1">1</span>;</span>
+<span class="pl-s1"><span class="pl-smi">$mailq</span><span class="pl-k">-&gt;</span>deleteNotification(<span class="pl-smi">$notificationId</span>);</span></pre></div>
+
+<h4>
+<a id="send-notification-e-mail" class="anchor" href="#send-notification-e-mail" aria-hidden="true"><span class="octicon octicon-link"></span></a>Send notification e-mail</h4>
+
+<p>In data section are all values which will be used in notification. Keys of associative array are variable names and values are values. </p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$data</span> <span class="pl-k">=</span> [</span>
+<span class="pl-s1">    <span class="pl-s"><span class="pl-pds">"</span>recipientEmail<span class="pl-pds">"</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">"</span>recipient@example.org<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s1">    <span class="pl-s"><span class="pl-pds">"</span>data<span class="pl-pds">"</span></span> <span class="pl-k">=&gt;</span> [</span>
+<span class="pl-s1">        <span class="pl-s"><span class="pl-pds">"</span>key1<span class="pl-pds">"</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">"</span>value1<span class="pl-pds">"</span></span>, </span>
+<span class="pl-s1">        <span class="pl-s"><span class="pl-pds">"</span>key2<span class="pl-pds">"</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">"</span>value2<span class="pl-pds">"</span></span></span>
+<span class="pl-s1">    ],</span>
+<span class="pl-s1">    <span class="pl-s"><span class="pl-pds">"</span>attachments<span class="pl-pds">"</span></span> <span class="pl-k">=&gt;</span> [</span>
+<span class="pl-s1">        [</span>
+<span class="pl-s1">            <span class="pl-s"><span class="pl-pds">"</span>displayName<span class="pl-pds">"</span></span> <span class="pl-k">=&gt;</span>  <span class="pl-s"><span class="pl-pds">"</span>Priloha 1<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s1">            <span class="pl-s"><span class="pl-pds">"</span>link<span class="pl-pds">"</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">"</span>http://example.org/test.txt<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s1">            <span class="pl-s"><span class="pl-pds">"</span>source<span class="pl-pds">"</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">"</span>dGVzdHM=<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s1">            <span class="pl-s"><span class="pl-pds">"</span>mimeType<span class="pl-pds">"</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">"</span>text/plain<span class="pl-pds">"</span></span></span>
+<span class="pl-s1">        ],</span>
+<span class="pl-s1">        [</span>
+<span class="pl-s1">            <span class="pl-s"><span class="pl-pds">"</span>displayName<span class="pl-pds">"</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">"</span>Priloha 2<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s1">            <span class="pl-s"><span class="pl-pds">"</span>link<span class="pl-pds">"</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">"</span>http://example.org/image.png<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s1">            <span class="pl-s"><span class="pl-pds">"</span>source<span class="pl-pds">"</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">"</span>R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s1">            <span class="pl-s"><span class="pl-pds">"</span>mimeType<span class="pl-pds">"</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">"</span>image/png<span class="pl-pds">"</span></span></span>
+<span class="pl-s1">        ]</span>
+<span class="pl-s1">    ]</span>
+<span class="pl-s1">];</span>
+<span class="pl-s1"><span class="pl-smi">$notificationId</span> <span class="pl-k">=</span> <span class="pl-c1">1</span>;</span>
+<span class="pl-s1"><span class="pl-smi">$notificationData</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-c1">NotificationDataEntity</span>(<span class="pl-smi">$data</span>); </span>
+<span class="pl-s1"><span class="pl-smi">$mailq</span><span class="pl-k">-&gt;</span>sendNotificationEmail(<span class="pl-smi">$notificationData</span>,<span class="pl-smi">$notificationId</span>);</span>
+<span class="pl-s1"><span class="pl-smi">$notificationDataId</span> <span class="pl-k">=</span> <span class="pl-smi">$notificationData</span><span class="pl-k">-&gt;</span>getId();</span></pre></div>
+
+<h4>
+<a id="get-notification-e-mail" class="anchor" href="#get-notification-e-mail" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get notification e-mail</h4>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$notificationId</span> <span class="pl-k">=</span> <span class="pl-c1">1</span>;</span>
+<span class="pl-s1"><span class="pl-smi">$notificationDataId</span> <span class="pl-k">=</span> <span class="pl-c1">2</span>;</span>
+<span class="pl-s1"><span class="pl-smi">$notificationData</span> <span class="pl-k">=</span> <span class="pl-smi">$mailq</span><span class="pl-k">-&gt;</span>getNotificationData(<span class="pl-smi">$notificationId</span>,<span class="pl-smi">$notificationDataId</span>);</span></pre></div>
+
+<h4>
+<a id="get-all-notification-e-mails" class="anchor" href="#get-all-notification-e-mails" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get all notification e-mails</h4>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$notificationId</span> <span class="pl-k">=</span> <span class="pl-c1">1</span>;</span>
+<span class="pl-s1"><span class="pl-smi">$email</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>recipiet@example.org<span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1"><span class="pl-smi">$notificationsData</span> <span class="pl-k">=</span> <span class="pl-smi">$mailq</span><span class="pl-k">-&gt;</span>getNotificationsData(<span class="pl-smi">$notificationId</span>,<span class="pl-smi">$email</span>);</span></pre></div>
+
+<h3>
+<a id="recipients-list-resource" class="anchor" href="#recipients-list-resource" aria-hidden="true"><span class="octicon octicon-link"></span></a>Recipients list resource</h3>
+
+<h4>
+<a id="create-recipients-list" class="anchor" href="#create-recipients-list" aria-hidden="true"><span class="octicon octicon-link"></span></a>Create recipients list</h4>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$data</span> <span class="pl-k">=</span> [</span>
+<span class="pl-s1">    <span class="pl-s"><span class="pl-pds">"</span>name<span class="pl-pds">"</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">"</span>All clients<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s1">    <span class="pl-s"><span class="pl-pds">"</span>description<span class="pl-pds">"</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">"</span>All clients of our awesome company<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s1">    <span class="pl-s"><span class="pl-pds">"</span>variables<span class="pl-pds">"</span></span> <span class="pl-k">=&gt;</span> [<span class="pl-s"><span class="pl-pds">"</span>salutation<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>gender<span class="pl-pds">"</span></span>],</span>
+<span class="pl-s1">    <span class="pl-s"><span class="pl-pds">"</span>formVisible<span class="pl-pds">"</span></span> <span class="pl-k">=&gt;</span> <span class="pl-c1">true</span></span>
+<span class="pl-s1">];</span>
+<span class="pl-s1"><span class="pl-smi">$recipientsList</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-c1">RecipientsListEntity</span>(<span class="pl-smi">$data</span>);</span>
+<span class="pl-s1"><span class="pl-smi">$mailq</span><span class="pl-k">-&gt;</span>createRecipientsList(<span class="pl-smi">$recipientList</span>);</span>
+<span class="pl-s1"><span class="pl-smi">$recipientsListId</span> <span class="pl-k">=</span> <span class="pl-smi">$recipientsList</span><span class="pl-k">-&gt;</span>getId();</span></pre></div>
+
+<h4>
+<a id="delete-recipients-list" class="anchor" href="#delete-recipients-list" aria-hidden="true"><span class="octicon octicon-link"></span></a>Delete recipients list</h4>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$recipientsListId</span> <span class="pl-k">=</span> <span class="pl-c1">1</span>;</span>
+<span class="pl-s1"><span class="pl-smi">$mailq</span><span class="pl-k">-&gt;</span>deleteRecipientsList(<span class="pl-smi">$recipientListId</span>);</span></pre></div>
+
+<h4>
+<a id="get-recipients-list" class="anchor" href="#get-recipients-list" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get recipients list</h4>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$recipientsListId</span> <span class="pl-k">=</span> <span class="pl-c1">1</span>;</span>
+<span class="pl-s1"><span class="pl-smi">$recipientsList</span> <span class="pl-k">=</span> <span class="pl-smi">$mailq</span><span class="pl-k">-&gt;</span>getRecipientsList(<span class="pl-smi">$recipientListId</span>);</span></pre></div>
+
+<h4>
+<a id="get-recipients-lists" class="anchor" href="#get-recipients-lists" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get recipients lists</h4>
+
+<p>You can specify e-mail and API returns only recipients list which contains this e-mail</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$email</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>recipient@example.org<span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1"><span class="pl-smi">$recipientsLists</span> <span class="pl-k">=</span> <span class="pl-smi">$mailq</span><span class="pl-k">-&gt;</span>getRecipientsLists(<span class="pl-smi">$email</span>);</span></pre></div>
+
+<h4>
+<a id="get-all-recipients" class="anchor" href="#get-all-recipients" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get all recipients</h4>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$recipientsListId</span> <span class="pl-k">=</span> <span class="pl-c1">1</span>;</span>
+<span class="pl-s1"><span class="pl-smi">$recipients</span> <span class="pl-k">=</span> <span class="pl-smi">$mailq</span><span class="pl-k">-&gt;</span>getRecipients(<span class="pl-smi">$recipientsListId</span>);</span></pre></div>
+
+<h4>
+<a id="add-multiple-recipients-at-once" class="anchor" href="#add-multiple-recipients-at-once" aria-hidden="true"><span class="octicon octicon-link"></span></a>Add multiple recipients at once</h4>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$data</span> <span class="pl-k">=</span> [</span>
+<span class="pl-s1">    <span class="pl-s"><span class="pl-pds">"</span>recipients<span class="pl-pds">"</span></span> <span class="pl-k">=&gt;</span> [</span>
+<span class="pl-s1">        [</span>
+<span class="pl-s1">            <span class="pl-s"><span class="pl-pds">"</span>email<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>recipient@example.org<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s1">            <span class="pl-s"><span class="pl-pds">"</span>data<span class="pl-pds">"</span></span>: [</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">"</span>key1<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>value1<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">"</span>key2<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>value2<span class="pl-pds">"</span></span></span>
+<span class="pl-s1">            ]</span>
+<span class="pl-s1">        ]</span>
+<span class="pl-s1">    ]</span>
+<span class="pl-s1">];</span>
+<span class="pl-s1"><span class="pl-smi">$recipients</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-c1">RecipientsEntity</span>(<span class="pl-smi">$data</span>);</span>
+<span class="pl-s1"><span class="pl-smi">$recipientsListId</span> <span class="pl-k">=</span> <span class="pl-c1">1</span>;</span>
+<span class="pl-s1"><span class="pl-smi">$validate</span> <span class="pl-k">=</span> <span class="pl-c1">false</span>;</span>
+<span class="pl-s1"><span class="pl-smi">$mailq</span><span class="pl-k">-&gt;</span>addRecipients(<span class="pl-smi">$recipients</span>,<span class="pl-smi">$recipientsListId</span>,<span class="pl-smi">$validate</span>);</span></pre></div>
+
+<h4>
+<a id="update-or-create-recipient" class="anchor" href="#update-or-create-recipient" aria-hidden="true"><span class="octicon octicon-link"></span></a>Update or create recipient</h4>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$data</span> <span class="pl-k">=</span> [</span>
+<span class="pl-s1">    <span class="pl-s"><span class="pl-pds">"</span>email<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>recipient@example.org<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s1">    <span class="pl-s"><span class="pl-pds">"</span>data<span class="pl-pds">"</span></span>: [</span>
+<span class="pl-s1">        <span class="pl-s"><span class="pl-pds">"</span>key1<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>value1<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s1">        <span class="pl-s"><span class="pl-pds">"</span>key2<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>value2<span class="pl-pds">"</span></span></span>
+<span class="pl-s1">    ]</span>
+<span class="pl-s1">];</span>
+<span class="pl-s1"><span class="pl-smi">$recipient</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-c1">RecipientEntity</span>(<span class="pl-smi">$data</span>);</span>
+<span class="pl-s1"><span class="pl-smi">$recipientsListId</span> <span class="pl-k">=</span> <span class="pl-c1">1</span>;</span>
+<span class="pl-s1"><span class="pl-smi">$validate</span> <span class="pl-k">=</span> <span class="pl-c1">false</span>;</span>
+<span class="pl-s1"><span class="pl-smi">$mailq</span><span class="pl-k">-&gt;</span>updateRecipient(<span class="pl-smi">$recipient</span>,<span class="pl-smi">$recipientsListId</span>,<span class="pl-smi">$validate</span>);</span></pre></div>
+
+<h4>
+<a id="get-all-recipients-list-unsubscriber" class="anchor" href="#get-all-recipients-list-unsubscriber" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get all recipients list unsubscriber</h4>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$recipientsListId</span> <span class="pl-k">=</span> <span class="pl-c1">1</span>;</span>
+<span class="pl-s1"><span class="pl-smi">$unsubscribers</span> <span class="pl-k">=</span> <span class="pl-smi">$mailq</span><span class="pl-k">-&gt;</span>getRecipientListUnsubscribers(<span class="pl-smi">$recipientsListId</span>);</span></pre></div>
+
+<h4>
+<a id="add-recipients-list-unsubscriber" class="anchor" href="#add-recipients-list-unsubscriber" aria-hidden="true"><span class="octicon octicon-link"></span></a>Add recipients list unsubscriber</h4>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$recipientsListId</span> <span class="pl-k">=</span> <span class="pl-c1">1</span>;</span>
+<span class="pl-s1"><span class="pl-smi">$email</span> <span class="pl-k">=</span> <span class="pl-c1">recipient</span><span class="pl-k">@</span><span class="pl-c1">example</span><span class="pl-k">.</span><span class="pl-c1">org</span><span class="pl-s"><span class="pl-pds">"</span>;</span></span>
+<span class="pl-s1"><span class="pl-s"><span class="pl-smi">$mailq</span><span class="pl-k">-&gt;</span><span class="pl-smi">addRecipientListUnsubscriber</span>(<span class="pl-smi">$emails</span>,<span class="pl-smi">$recipientsListId</span>);</span></span></pre></div>
+
+<h4>
+<a id="add-recipients-list-unsubscribers" class="anchor" href="#add-recipients-list-unsubscribers" aria-hidden="true"><span class="octicon octicon-link"></span></a>Add recipients list unsubscribers</h4>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$data</span> <span class="pl-k">=</span> [</span>
+<span class="pl-s1">    <span class="pl-s"><span class="pl-pds">"</span>emails<span class="pl-pds">"</span></span> <span class="pl-k">=&gt;</span> [</span>
+<span class="pl-s1">        [</span>
+<span class="pl-s1">            <span class="pl-s"><span class="pl-pds">"</span>email<span class="pl-pds">"</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">"</span>recipient@example.org<span class="pl-pds">"</span></span></span>
+<span class="pl-s1">        ],</span>
+<span class="pl-s1">        [</span>
+<span class="pl-s1">            <span class="pl-s"><span class="pl-pds">"</span>email<span class="pl-pds">"</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">"</span>recipient2@example.org<span class="pl-pds">"</span></span></span>
+<span class="pl-s1">        ]</span>
+<span class="pl-s1">    ]</span>
+<span class="pl-s1">];</span>
+<span class="pl-s1"><span class="pl-smi">$recipientsListId</span> <span class="pl-k">=</span> <span class="pl-c1">1</span>;</span>
+<span class="pl-s1"><span class="pl-smi">$emails</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-c1">EmailAddressesEntity</span>(<span class="pl-smi">$data</span>);</span>
+<span class="pl-s1"><span class="pl-smi">$mailq</span><span class="pl-k">-&gt;</span>addRecipientListUnsubscribers(<span class="pl-smi">$emails</span>,<span class="pl-smi">$recipientsListId</span>);</span></pre></div>
+
+<h4>
+<a id="delete-recipients-list-unsubscriber" class="anchor" href="#delete-recipients-list-unsubscriber" aria-hidden="true"><span class="octicon octicon-link"></span></a>Delete recipients list unsubscriber</h4>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$recipientsListId</span> <span class="pl-k">=</span> <span class="pl-c1">1</span>;</span>
+<span class="pl-s1"><span class="pl-smi">$email</span> <span class="pl-k">=</span> <span class="pl-c1">recipient</span><span class="pl-k">@</span><span class="pl-c1">example</span><span class="pl-k">.</span><span class="pl-c1">org</span><span class="pl-s"><span class="pl-pds">"</span>;</span></span>
+<span class="pl-s1"><span class="pl-s"><span class="pl-smi">$mailq</span><span class="pl-k">-&gt;</span><span class="pl-smi">deleteRecipientListUnsubscriber</span>(<span class="pl-smi">$emails</span>,<span class="pl-smi">$recipientsListId</span>);</span></span></pre></div>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/QuantiCZ/MailQ-PHP-Library">MailQ PHP library</a> is maintained by <a href="https://github.com/QuantiCZ">QuantiCZ</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
