@@ -66,7 +66,7 @@ class Connector {
      * @return Response
      */
     private function createResponse($ch,$response) {
-        $responseData = new \Response();
+        $responseData = new Response();
         $responseData->setHttpCode(curl_getinfo($ch, CURLINFO_HTTP_CODE));
         if ($responseData->isOk()) {
             if (!$responseData->isNoContent()) {
