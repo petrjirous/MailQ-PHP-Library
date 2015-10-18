@@ -81,7 +81,7 @@ class Connector {
         return $responseData;
     }
     
-    function processError(\Response $responseData,$response) {
+    function processError(Response $responseData,$response) {
         switch ($responseData->getHttpCode()) {
             case 401: throw new \Exception($responseData->getHttpCode()." Invalid API key.");
             case 405: throw new \Exception($responseData->getHttpCode()." Method not allowed.");
