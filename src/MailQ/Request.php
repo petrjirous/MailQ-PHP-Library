@@ -134,7 +134,7 @@ class Request {
         return self::createRequest(self::HTTP_METHOD_DELETE, $path,$headers,$parameters);
     }
     
-    private function createRequest($method,$path,$parameters = null,$headers = null, Entities\BaseEntity $content = null) {
+    private static function createRequest($method,$path,$parameters = null,$headers = null, Entities\BaseEntity $content = null) {
         $request = new Request($method,$path);
         $request->setHeaders($headers);
         $request->setParameters($parameters);
