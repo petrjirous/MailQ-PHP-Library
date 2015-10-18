@@ -54,9 +54,10 @@ class Connector {
         } elseif ($request->isPut()) {
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, Request::HTTP_METHOD_PUT);
         }
-        $response = curl_exec($ch);
+        $responseData = curl_exec($ch);
+        $response = $this->createResponse($ch,$responseData);
         curl_close($ch);
-        return $this->createResponse($ch,$response);
+        return $response;
     }
     
     /**
