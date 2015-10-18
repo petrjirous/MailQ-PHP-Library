@@ -8,7 +8,7 @@ use MailQ\Entities\v2\CompanyEntity;
 use MailQ\Request;
 use stdClass;
 
-trait CompanyResource {
+trait CampaignResource {
     
     /**
      * 
