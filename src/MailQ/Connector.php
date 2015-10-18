@@ -37,9 +37,9 @@ class Connector {
         $curlHeaders = $this->createCurlHeaders(array_merge($request->getHeaders(),$this->createDefaultHeaders()));
         $url = $this->baseUrl.'/companies/'.$request->getPath();
         if ($request->hasParameters()) {
-            $url = '?'.http_build_query($request->getParameters());
+            $url .= '?'.http_build_query($request->getParameters());
         }
-        curl_setopt($ch, CURLOPT_URL, $this->baseUrl.'/companies/'.$request->getPath());
+        curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
         curl_setopt($ch, CURLOPT_HEADER, FALSE);
         curl_setopt($ch, CURLOPT_HEADERFUNCTION, array($this,'storeHeader'));
