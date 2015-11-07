@@ -70,17 +70,17 @@ $logMessageEntity = $mailq->getLogMessage($logMessageId);
 ```php
 $data = [
  	"name" => "Awesome newsletter",
-     "campaign": "Spring 2016",
-     "subject" : "Buy our new product",
-     "senderEmail" : "newsletter@example.org",
-     "sendAs" : "Awesome Company",
-     "from" : "2015-06-12T06:00:00.000",
-     "to" : "2016-06-19T06:00:00.000",
-     "text": "QWx0ZXJuYXRpdmUgYmFzZTY0IGVtYWlsIHRleHQ=",
-     "automaticTime": false,
-     "recipientsListId": 1,
-     "templateUrl" : "http://example.org/newsletter.html",
-     "unsubscribeTemplateUrl" : "http://example.org/unsubscribe.html"
+     "campaign"=> "Spring 2016",
+     "subject" => "Buy our new product",
+     "senderEmail" => "newsletter@example.org",
+     "sendAs" => "Awesome Company",
+     "from" => "2015-06-12T06:00:00.000",
+     "to" => "2016-06-19T06:00:00.000",
+     "text"=> "QWx0ZXJuYXRpdmUgYmFzZTY0IGVtYWlsIHRleHQ=",
+     "automaticTime"=> false,
+     "recipientsListId"=>1,
+     "templateUrl" => "http://example.org/newsletter.html",
+     "unsubscribeTemplateUrl" => "http://example.org/unsubscribe.html"
 ];
 $newsletter = new \MailQ\Entities\v2\NewsletterEntity($data);
 $mailq->createNewsletter($newsletter);
@@ -93,17 +93,17 @@ $newsletterId = $newsletter->getId();
 ```php
 $data = [
  	"name" => "Awesome newsletter",
-     "campaign": "Spring 2016",
-     "subject" : "Buy our new product",
-     "senderEmail" : "newsletter@example.org",
-     "sendAs" : "Awesome Company",
-     "from" : "2015-06-12T06:00:00.000",
-     "to" : "2016-06-19T06:00:00.000",
-     "text": "QWx0ZXJuYXRpdmUgYmFzZTY0IGVtYWlsIHRleHQ=",
-     "automaticTime": false,
-     "recipientsListId": 1,
-     "templateUrl" : "http://example.org/newsletter.html",
-     "unsubscribeTemplateUrl" : "http://example.org/unsubscribe.html"
+     "campaign" => "Spring 2016",
+     "subject" => "Buy our new product",
+     "senderEmail" => "newsletter@example.org",
+     "sendAs" => "Awesome Company",
+     "from" => "2015-06-12T06:00:00.000",
+     "to" => "2016-06-19T06:00:00.000",
+     "text" => "QWx0ZXJuYXRpdmUgYmFzZTY0IGVtYWlsIHRleHQ=",
+     "automaticTime" => false,
+     "recipientsListId" => 1,
+     "templateUrl" => "http://example.org/newsletter.html",
+     "unsubscribeTemplateUrl" => "http://example.org/unsubscribe.html"
 ];
 $newsletter = new \MailQ\Entities\v2\NewsletterEntity($data);
 $mailq->updateNewsletter($newsletter);
@@ -151,13 +151,13 @@ $mailq->stopNewsletter($newsletterId);
 
 ```php
 $data = [
- 	"name": "First Notification",
-    "code": "N1",
-    "subject": "{{orderNumber}} order is ready",
-    "sendAs": "Awesome Company",
-    "text": "QWx0ZXJuYXRpdmUgYmFzZTY0IGVtYWlsIHRleHQ=",
-    "template": "QWx0ZXJuYXRpdmUgYmFzZTY0IGVtYWlsIHRleHQ=",
-    "appliedSenderEmail": "notification@example.org"
+ 	"name" => "First Notification",
+    "code" => "N1",
+    "subject" => "{{orderNumber}} order is ready",
+    "sendAs" => "Awesome Company",
+    "text" => "QWx0ZXJuYXRpdmUgYmFzZTY0IGVtYWlsIHRleHQ=",
+    "template" => "QWx0ZXJuYXRpdmUgYmFzZTY0IGVtYWlsIHRleHQ=",
+    "appliedSenderEmail" => "notification@example.org"
 ];
 $notification = new \MailQ\Entities\v2\NotificationEntity($data);
 $mailq->createNotification($notification);
@@ -168,13 +168,13 @@ $notificationId = $notification->getId();
 
 ```php
 $data = [
- 	"name": "First Notification",
-    "code": "N1",
-    "subject": "{{orderNumber}} order is ready",
-    "sendAs": "Awesome Company",
-    "text": "QWx0ZXJuYXRpdmUgYmFzZTY0IGVtYWlsIHRleHQ=",
-    "template": "QWx0ZXJuYXRpdmUgYmFzZTY0IGVtYWlsIHRleHQ=",
-    "appliedSenderEmail": "notification@example.org"
+ 	"name" => "First Notification",
+    "code" => "N1",
+    "subject" => "{{orderNumber}} order is ready",
+    "sendAs" => "Awesome Company",
+    "text" => "QWx0ZXJuYXRpdmUgYmFzZTY0IGVtYWlsIHRleHQ=",
+    "template" => "QWx0ZXJuYXRpdmUgYmFzZTY0IGVtYWlsIHRleHQ=",
+    "appliedSenderEmail" => "notification@example.org"
 ];
 $notification = new \MailQ\Entities\v2\NotificationEntity($data);
 $mailq->updateNotification($notification);
@@ -295,10 +295,10 @@ $recipients = $mailq->getRecipients($recipientsListId);
 $data = [
 	"recipients" => [
 		[
-			"email": "recipient@example.org",
-	        "data": [
-	            "key1": "value1",
-	            "key2": "value2"
+			"email" => "recipient@example.org",
+	        "data" => [
+	            "key1" => "value1",
+	            "key2" => "value2"
 	        ]
 		]
 	]
@@ -313,10 +313,10 @@ $mailq->addRecipients($recipients,$recipientsListId,$validate);
 
 ```php
 $data = [
-	"email": "recipient@example.org",
-    "data": [
-        "key1": "value1",
-        "key2": "value2"
+	"email" => "recipient@example.org",
+    "data" => [
+        "key1" => "value1",
+        "key2" => "value2"
     ]
 ];
 $recipient = new \MailQ\Entities\v2\RecipientEntity($data);
@@ -438,17 +438,17 @@ $smsNotificationId = 1;
 $data = [
 	"batch" => [
         [    
-            "id": 1,
-            "toNumber": "+420123456789", 
-            "data": [         
-                "text": "value1"   
+            "id" => 1,
+            "toNumber" => "+420123456789", 
+            "data" => [         
+                "text" => "value1"   
             ]
         ],
         [     
-            "id": 2,
-            "toNumber": "+420123456789", 
-            "data": [        
-                "text": "value2"   
+            "id" => 2,
+            "toNumber" => "+420123456789", 
+            "data" => [        
+                "text" => "value2"   
             ]
         ]
 
