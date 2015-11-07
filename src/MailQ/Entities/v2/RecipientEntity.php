@@ -10,7 +10,7 @@ class RecipientEntity extends BaseEntity {
     /**
      * @in
      * @out
-     * @var type 
+     * @var string 
      */
     private $email;
     /**
@@ -28,7 +28,7 @@ class RecipientEntity extends BaseEntity {
         return $this->data;
     }
 
-    public function setEmail(type $email) {
+    public function setEmail($email) {
         $this->email = $email;
     }
 
