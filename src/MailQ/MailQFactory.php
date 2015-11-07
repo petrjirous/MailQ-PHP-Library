@@ -22,8 +22,14 @@ class MailQFactory {
      * @return MailQ
      */
     public function createMailQ($companyId) {
-        $connector = Connector::getInstance($this->baseUrl, $this->apiKey);
-        return new MailQ($connector,$companyId);
+        if ($companyId != null) {
+            $connector = Connector::getInstance($this->baseUrl, $this->apiKey);
+            return new MailQ($connector,$companyId);
+        }
+        else {
+            throw new Exception("Cannot create MailQ object without companyId. Expecting number, got {$companyId}.");
+        }
+        
     }
 
 }
