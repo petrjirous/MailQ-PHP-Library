@@ -48,7 +48,7 @@ class RecipientsListEntity extends BaseEntity {
      * @out
      * @var array 
      */
-    private $variables;
+    private $variables = [];
     /**
      * @in
      * @out

@@ -8,7 +8,7 @@ $apiKey = "6e2211bf472a9478f03420fb5897e324c57d05fc27bc0e871083275e98eec344";
 $apiUrl = "http://mailq-test.quanti.cz/api/v2";
 $mailqFactory = new MailQFactory($apiUrl,$apiKey);
 $companyId = 1;
-$mailq = $mailqFactory = $factory->createMailQ($companyId);
+$mailq = $mailqFactory->createMailQ($companyId);
 ```
 
 
@@ -82,7 +82,7 @@ $data = [
      "templateUrl" : "http://example.org/newsletter.html",
      "unsubscribeTemplateUrl" : "http://example.org/unsubscribe.html"
 ];
-$newsletter = new NewsletterEntity($data);
+$newsletter = new \MailQ\Entities\v2\NewsletterEntity($data);
 $mailq->createNewsletter($newsletter);
 $newsletterId = $newsletter->getId();
 ```
@@ -105,7 +105,7 @@ $data = [
      "templateUrl" : "http://example.org/newsletter.html",
      "unsubscribeTemplateUrl" : "http://example.org/unsubscribe.html"
 ];
-$newsletter = new NewsletterEntity($data);
+$newsletter = new \MailQ\Entities\v2\NewsletterEntity($data);
 $mailq->updateNewsletter($newsletter);
 $newsletterId = $newsletter->getId();
 ```
@@ -159,7 +159,7 @@ $data = [
     "template": "QWx0ZXJuYXRpdmUgYmFzZTY0IGVtYWlsIHRleHQ=",
     "appliedSenderEmail": "notification@example.org"
 ];
-$notification = new NotificationEntity($data);
+$notification = new \MailQ\Entities\v2\NotificationEntity($data);
 $mailq->createNotification($notification);
 $notificationId = $notification->getId();
 ```
@@ -176,7 +176,7 @@ $data = [
     "template": "QWx0ZXJuYXRpdmUgYmFzZTY0IGVtYWlsIHRleHQ=",
     "appliedSenderEmail": "notification@example.org"
 ];
-$notification = new NotificationEntity($data);
+$notification = new \MailQ\Entities\v2\NotificationEntity($data);
 $mailq->updateNotification($notification);
 ```
 
@@ -220,7 +220,7 @@ $data = [
     ]
 ];
 $notificationId = 1;
-$notificationData = new NotificationDataEntity($data); 
+$notificationData = new \MailQ\Entities\v2\NotificationDataEntity($data); 
 $mailq->sendNotificationEmail($notificationData,$notificationId);
 $notificationDataId = $notificationData->getId();
 ```
@@ -246,14 +246,15 @@ $notificationsData = $mailq->getNotificationsData($notificationId,$email);
 #### Create recipients list
 
 ```php
+$mailq = $mailqFactory->createMailQ($companyId);
 $data = [
     "name" => "All clients",
     "description" => "All clients of our awesome company",
     "variables" => ["salutation","gender"],
     "formVisible" => true
 ];
-$recipientsList = new RecipientsListEntity($data);
-$mailq->createRecipientsList($recipientList);
+$recipientsList = new \MailQ\Entities\v2\RecipientsListEntity($data);
+$mailq->createRecipientsList($recipientsList);
 $recipientsListId = $recipientsList->getId();
 ```
 
@@ -302,7 +303,7 @@ $data = [
 		]
 	]
 ];
-$recipients = new RecipientsEntity($data);
+$recipients = new \MailQ\Entities\v2\RecipientsEntity($data);
 $recipientsListId = 1;
 $validate = false;
 $mailq->addRecipients($recipients,$recipientsListId,$validate);
@@ -318,7 +319,7 @@ $data = [
         "key2": "value2"
     ]
 ];
-$recipient = new RecipientEntity($data);
+$recipient = new \MailQ\Entities\v2\RecipientEntity($data);
 $recipientsListId = 1;
 $validate = false;
 $mailq->updateRecipient($recipient,$recipientsListId,$validate);
@@ -353,7 +354,7 @@ $data = [
 	]
 ];
 $recipientsListId = 1;
-$emails = new EmailAddressesEntity($data);
+$emails = new \MailQ\Entities\v2\EmailAddressesEntity($data);
 $mailq->addRecipientListUnsubscribers($emails,$recipientsListId);
 ```
 
@@ -376,7 +377,7 @@ $data = [
     "code" => "S1",
     "template" => "U01TIHRlc3Qge3t2YXJpYWJsZX19"
 ];
-$smsNotification = new SmsNotificationEntity($data);
+$smsNotification = new \MailQ\Entities\v2\SmsNotificationEntity($data);
 $mailq->createSmsNotification($smsNotification);
 $smsNotificationId = $smsNotification->getId();
 ```
@@ -390,7 +391,7 @@ $data = [
     "code" => "S1",
     "template" => "U01TIHRlc3Qge3t2YXJpYWJsZX19"
 ];
-$smsNotification = new SmsNotificationEntity($data);
+$smsNotification = new \MailQ\Entities\v2\SmsNotificationEntity($data);
 $mailq->updateSmsNotification($smsNotification);
 ```
 
@@ -425,7 +426,7 @@ $data = [
         "key2" => "value2"
     ]
 ];
-$sms = new SmsEntity($data);
+$sms = new \MailQ\Entities\v2\SmsEntity($data);
 $mailq->sendSms($sms,$smsNotificationId);
 $smsId = $sms->getId();
 ```
@@ -453,7 +454,7 @@ $data = [
 
     ]
 ];
-$smsBatch = new SmsBatchEntity($data);
+$smsBatch = new \MailQ\Entities\v2\SmsBatchEntity($data);
 $smsBatchResultEntity = $mailq->sendSmsBatch($smsBatch,$smsNotificationId);
 ```
 
