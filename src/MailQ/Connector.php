@@ -44,6 +44,9 @@ class Connector {
         curl_setopt($ch, CURLOPT_HEADER, FALSE);
         curl_setopt($ch, CURLOPT_HEADERFUNCTION, array($this,'storeHeader'));
         curl_setopt($ch, CURLOPT_HTTPHEADER, $curlHeaders);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
+        
         if ($request->hasContent()) {
             curl_setopt($ch, CURLOPT_POSTFIELDS, $request->getContent());
         }

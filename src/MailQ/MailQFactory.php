@@ -1,5 +1,7 @@
 <?php
 
+namespace MailQ;
+
 use MailQ\Connector;
 use MailQ\MailQ;
 
