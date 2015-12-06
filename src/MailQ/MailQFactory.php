@@ -20,7 +20,7 @@ class MailQFactory {
     
     
     /**
-     * @param type $companyId
+     * @param int $companyId
      * @return MailQ
      */
     public function createMailQ($companyId) {

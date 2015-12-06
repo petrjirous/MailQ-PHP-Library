@@ -12,7 +12,7 @@ trait NewsletterResource {
     
     /**
      * 
-     * @param type $newsletterId
+     * @param int $newsletterId
      */
     public function startNewsletter($newsletterId) {
         $request = Request::put("{$this->getCompanyId()}/newsletters/{$newsletterId}/preparation");

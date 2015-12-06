@@ -17,7 +17,7 @@ trait SmsNotificationResource {
     /**
      * 
      * @param SmsEntity $smsEntity
-     * @param type $smsNotificationId
+     * @param int $smsNotificationId
      * @return SmsEntity
      */
     public function sendSms(SmsEntity $smsEntity,$smsNotificationId) {

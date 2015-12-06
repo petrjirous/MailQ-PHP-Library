@@ -46,7 +46,7 @@ class Connector {
         curl_setopt($ch, CURLOPT_HTTPHEADER, $curlHeaders);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
-        
+        curl_setopt($ch, CURLOPT_CAINFO, implode(DIRECTORY_SEPARATOR, array(__DIR__ ,"certificate.crt")));
         if ($request->hasContent()) {
             curl_setopt($ch, CURLOPT_POSTFIELDS, $request->getContent());
         }
@@ -65,7 +65,7 @@ class Connector {
     
     /**
      * 
-     * @param type $ch
+     * @param $ch
      * @param string $response
      * @return Response
      */

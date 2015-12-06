@@ -13,7 +13,7 @@ class Request {
     
     /**
      *
-     * @var type 
+     * @var string 
      */
     private $method;
     /**

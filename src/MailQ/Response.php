@@ -6,17 +6,17 @@ class Response {
     
     /**
      *
-     * @var type 
+     * @var string 
      */
     private $content;
     /**
      *
-     * @var type 
+     * @var int 
      */
     private $httpCode;
     /**
      *
-     * @var type 
+     * @var array 
      */
     private $headers;
     

@@ -6,8 +6,8 @@ interface IConnectorFactory {
 
     /**
      * 
-     * @param type $baseUrl
-     * @param type $apiKey
+     * @param string $baseUrl
+     * @param string $apiKey
      * @return \MailQ\Connector
      */
     public function create($baseUrl,$apiKey);
