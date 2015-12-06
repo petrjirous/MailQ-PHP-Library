@@ -1,5 +1,16 @@
 # MailQ PHP library
 
+## Instalation
+
+### Composer
+```
+composer require quanti/mailq-connector
+```
+
+### Using in Nette
+
+Add this section to your config. You should use different URL and API key for development and production environment.
+
 ## Usage
 There is MailQ object which is facade to whole MailQ REST API. Most common use case is only one company in MailQ per customer. You need to instantiate MailQ object with company ID. Because there are also customers with multiple companies there is MailQFactory which creates MailQ for specific company.
  
