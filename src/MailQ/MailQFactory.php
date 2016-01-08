@@ -29,7 +29,7 @@ class MailQFactory {
             return new MailQ($connector,$companyId);
         }
         else {
-            throw new Exception("Cannot create MailQ object without companyId. Expecting number, got {$companyId}.");
+            throw new \Exception("Cannot create MailQ object without companyId. Expecting number, got {$companyId}.");
         }
         
     }
