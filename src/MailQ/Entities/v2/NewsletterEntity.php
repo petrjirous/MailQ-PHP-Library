@@ -75,6 +75,13 @@ class NewsletterEntity extends BaseEntity {
      * @var bool 
      */
     private $automaticTime;
+	
+	/**
+     * @in
+     * @out
+     * @var bool 
+     */
+    private $unlimited;
 
     /**
      * @in
@@ -82,6 +89,13 @@ class NewsletterEntity extends BaseEntity {
      * @var integer 
      */
     private $recipientsListId;
+	
+	/**
+     * @in
+     * @out
+     * @var integer 
+     */
+    private $dataPersistence;
 
     /**
      * @in
@@ -90,14 +104,23 @@ class NewsletterEntity extends BaseEntity {
      */
     private $campaign;
 
+	/**
+     * @in
+     * @out
+     * @var string 
+     */
+    private $csvUrl;
+	
     /**
-     *
+     * @in
+     * @out
      * @var string 
      */
     private $templateUrl;
 
     /**
-     *
+     * @in
+     * @out
      * @var string 
      */
     private $unsubscribeTemplateUrl;
@@ -116,6 +139,13 @@ class NewsletterEntity extends BaseEntity {
      * @var LinkEntity 
      */
     private $company;
+	
+	/**
+	 * @in
+     * @out
+	 * @var string 
+	 */
+	private $text;
 
     public function getId() {
         return $this->id;
@@ -270,5 +300,39 @@ class NewsletterEntity extends BaseEntity {
     public function setUnsubscribeTemplateUrl($unsubscribeTemplateUrl) {
         $this->unsubscribeTemplateUrl = $unsubscribeTemplateUrl;
     }
+	
+	public function getUnlimited() {
+		return $this->unlimited;
+	}
+
+	public function getDataPersistence() {
+		return $this->dataPersistence;
+	}
+
+	public function getCsvUrl() {
+		return $this->csvUrl;
+	}
+
+	public function getText() {
+		return $this->text;
+	}
+
+	public function setUnlimited($unlimited) {
+		$this->unlimited = $unlimited;
+	}
+
+	public function setDataPersistence($dataPersistence) {
+		$this->dataPersistence = $dataPersistence;
+	}
+
+	public function setCsvUrl($csvUrl) {
+		$this->csvUrl = $csvUrl;
+	}
+
+	public function setText($text) {
+		$this->text = $text;
+	}
+
+
 
 }
