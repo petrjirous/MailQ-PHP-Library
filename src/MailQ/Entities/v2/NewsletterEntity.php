@@ -146,10 +146,18 @@ class NewsletterEntity extends BaseEntity {
     }
 
     public function getFrom() {
-        return $this->from;
+        return $this->from->format('Y-m-d\TH:i:s.u');
     }
 
     public function getTo() {
+        return $this->to->format('Y-m-d\TH:i:s.u');
+    }
+	
+	public function getFromAsDateTime() {
+        return $this->from;
+    }
+
+    public function getToAsDateTime() {
         return $this->to;
     }
 

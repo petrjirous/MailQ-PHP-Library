@@ -21,7 +21,7 @@ class CampaignEntity extends BaseEntity {
      /**
      * @in
      * @out
-     * @var string 
+     * @var \DateTime 
      */
     private $created;
     /**
@@ -48,6 +48,10 @@ class CampaignEntity extends BaseEntity {
     }
 
     public function getCreated() {
+        return $this->created->format('Y-m-d\TH:i:s.u');
+    }
+	
+	public function getCreatedAsDateTime() {
         return $this->created;
     }
 
