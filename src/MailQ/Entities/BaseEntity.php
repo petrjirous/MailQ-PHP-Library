@@ -21,7 +21,7 @@ class BaseEntity extends \Nette\Object {
      * @param bool $inverse
      * @throws \Nette\Utils\JsonException
      */
-    public function __construct($data, $inverse = false) {
+    public function __construct($data = NULL, $inverse = false) {
         if ($data !== null) {
             if (is_string($data)) {
                 $data = Json::decode($data);
