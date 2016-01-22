@@ -48,8 +48,14 @@ class CampaignEntity extends BaseEntity {
     }
 
     public function getCreated() {
-        return $this->created->format('Y-m-d\TH:i:s.u');
+		if ($this->created != null) {
+			return $this->created->format('Y-m-d\TH:i:s.u');
+		}
+		else {
+			return null;
+		}
     }
+	
 	
 	public function getCreatedAsDateTime() {
         return $this->created;
