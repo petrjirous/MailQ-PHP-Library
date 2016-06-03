@@ -2,6 +2,9 @@
 
 namespace MailQ;
 
+use MailQ\Exceptions\MailQException;
+use MailQ\Exceptions\UnresolvedMxDomainException;
+
 class Connector {
     
     private $apiKey;
@@ -86,11 +89,32 @@ class Connector {
     
     function processError(Response $responseData,$response) {
         switch ($responseData->getHttpCode()) {
-            case 401: throw new \Exception($responseData->getHttpCode()." Invalid API key.");
-            case 405: throw new \Exception($responseData->getHttpCode()." Method not allowed.");
-            default: throw new \Exception($responseData->getHttpCode().": ".$response);
+            case 401: throw new MailQException("Invalid API key.",$responseData->getHttpCode());
+            case 405: throw new MailQException(" Method not allowed.",$responseData->getHttpCode());
+            default: $this->handleDefaultException($responseData,$response);
         }
     }
+	
+	private function handleDefaultException(Response $responseData,$response) {
+		$errorData = json_decode($response);
+		if ($errorData) {
+			if (isset($errorData->error)) {
+				$this->createSpecificException($errorData->error);
+			}
+		}
+		else {
+			throw new MailQException("Unknonw exception",$responseData->getHttpCode());
+		}
+	}
+	
+	private function createSpecificException($errorData) {
+		if ($errorData->message == 'Could not resolve MX domain.') {
+			throw new UnresolvedMxDomainException($errorData->message,$errorData->code);
+		}
+		else {
+			throw new MailQException($errorData->message,$errorData->code);
+		}
+	}
 
     /**
      * Storing headers from curl
