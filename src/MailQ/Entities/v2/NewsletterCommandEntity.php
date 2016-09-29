@@ -18,22 +18,44 @@ class NewsletterCommandEntity extends BaseEntity {
      * @var bool 
      */
     private $stop;
-    
-    public function getStart() {
+
+    /**
+     * @return boolean
+     */
+    public function isStart()
+    {
         return $this->start;
     }
 
-    public function getStop() {
+    /**
+     * @param boolean $start
+     * @return NewsletterCommandEntity
+     */
+    public function setStart($start)
+    {
+        $this->start = $start;
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isStop()
+    {
         return $this->stop;
     }
 
-    public function setStart($start) {
-        $this->start = $start;
-    }
-
-    public function setStop($stop) {
+    /**
+     * @param boolean $stop
+     * @return NewsletterCommandEntity
+     */
+    public function setStop($stop)
+    {
         $this->stop = $stop;
+        return $this;
     }
+    
+   
 
 
 

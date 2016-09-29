@@ -4,24 +4,35 @@ namespace MailQ\Entities\v2;
 
 use MailQ\Entities\BaseEntity;
 
-class SmsBatchEntity extends BaseEntity {
-
-    
-   /**
-    * @in
-    * @out
-    * @var SmsEntity
-    * @collection 
-    */
-    private $batch;
+class SmsBatchEntity extends BaseEntity
+{
 
 
-    public function getBatch() {
-        return $this->batch;
-    }
+	/**
+	 * @in
+	 * @out
+	 * @var SmsEntity
+	 * @collection
+	 */
+	private $batch;
 
-    public function setBatch(SmsEntity $batch) {
-        $this->batch = $batch;
-    }
+	/**
+	 * @return SmsEntity
+	 */
+	public function getBatch()
+	{
+		return $this->batch;
+	}
+
+	/**
+	 * @param SmsEntity $batch
+	 * @return SmsBatchEntity
+	 */
+	public function setBatch($batch)
+	{
+		$this->batch = $batch;
+		return $this;
+	}
+
 
 }

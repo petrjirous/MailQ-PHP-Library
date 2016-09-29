@@ -4,26 +4,35 @@ namespace MailQ\Entities\v2;
 
 use MailQ\Entities\BaseEntity;
 
-class NotificationsEntity extends BaseEntity {
+class NotificationsEntity extends BaseEntity
+{
 
-   
-    /**
-     * @in
-     * @out
-     * @var NotificationEntity
-     * @collection
-     */
-    private $notifications;
+
+	/**
+	 * @in
+	 * @out
+	 * @var NotificationEntity
+	 * @collection
+	 */
+	private $notifications;
+
+	/**
+	 * @return NotificationEntity
+	 */
+	public function getNotifications()
+	{
+		return $this->notifications;
+	}
+
+	/**
+	 * @param NotificationEntity $notifications
+	 * @return NotificationsEntity
+	 */
+	public function setNotifications($notifications)
+	{
+		$this->notifications = $notifications;
+		return $this;
+	}
     
-   
-    public function getNotifications() {
-        return $this->notifications;
-    }
-
-    public function setNotifications($notifications) {
-        $this->notifications = $notifications;
-    }
-
-
 
 }

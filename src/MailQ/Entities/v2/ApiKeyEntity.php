@@ -4,39 +4,60 @@ namespace MailQ\Entities\v2;
 
 use MailQ\Entities\BaseEntity;
 
-class ApiKeyEntity extends BaseEntity {
+class ApiKeyEntity extends BaseEntity
+{
 
-    /**
-     * @in
-     * @out
-     * @var integer 
-     */
-    private $id;
-   
-    /**
-     * @in
-     * @out
-     * @var integer 
-     */
-    private $apiKey;
+	/**
+	 * @in
+	 * @out
+	 * @var integer
+	 */
+	private $id;
 
-    function getId() {
-        return $this->id;
-    }
+	/**
+	 * @in
+	 * @out
+	 * @var integer
+	 */
+	private $apiKey;
 
-    function getApiKey() {
-        return $this->apiKey;
-    }
+	/**
+	 * @return int
+	 */
+	public function getId()
+	{
+		return $this->id;
+	}
 
-    function setId($id) {
-        $this->id = $id;
-    }
+	/**
+	 * @param int $id
+	 * @return ApiKeyEntity
+	 */
+	public function setId($id)
+	{
+		$this->id = $id;
+		return $this;
+	}
 
-    function setApiKey($apiKey) {
-        $this->apiKey = $apiKey;
-    }
+	/**
+	 * @return int
+	 */
+	public function getApiKey()
+	{
+		return $this->apiKey;
+	}
 
+	/**
+	 * @param int $apiKey
+	 * @return ApiKeyEntity
+	 */
+	public function setApiKey($apiKey)
+	{
+		$this->apiKey = $apiKey;
+		return $this;
+	}
 
+	
 
 
 }

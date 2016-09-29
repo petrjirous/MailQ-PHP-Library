@@ -12,43 +12,49 @@ use MailQ\Resources\SmsNotificationResource;
 use MailQ\Resources\UnsubscriberResource;
 use MailQ\Resources\UserResource;
 
-class MailQ  {
+class MailQ
+{
 
-    use CompanyResource, 
-        LogMessageResource, 
-        NewsletterResource, 
-        NotificationResource,
-        RecipientListResource,
-        SenderEmailResource,
-        SmsNotificationResource,
-        UnsubscriberResource,
-        UserResource;
+	use CompanyResource,
+		LogMessageResource,
+		NewsletterResource,
+		NotificationResource,
+		RecipientListResource,
+		SenderEmailResource,
+		SmsNotificationResource,
+		UnsubscriberResource,
+		UserResource;
 
-    /**
-     * @var Connector 
-     */
-    private $connector;
-    private $companyId;
+	/**
+	 * @var Connector
+	 */
+	private $connector;
 
-    public function __construct(Connector $connector, $companyId) {
-        $this->connector = $connector;
-        $this->companyId = $companyId;
-    }
+	private $companyId;
 
-    public function setCompanyId($companyId) {
-        $this->companyId = $companyId;
-    }
+	public function __construct(Connector $connector, $companyId)
+	{
+		$this->connector = $connector;
+		$this->companyId = $companyId;
+	}
 
-    /**
-     * 
-     * @return Connector
-     */
-    protected function getConnector() {
-        return $this->connector;
-    }
+	public function setCompanyId($companyId)
+	{
+		$this->companyId = $companyId;
+	}
 
-    protected function getCompanyId() {
-        return $this->companyId;
-    }
+	/**
+	 *
+	 * @return Connector
+	 */
+	protected function getConnector()
+	{
+		return $this->connector;
+	}
+
+	protected function getCompanyId()
+	{
+		return $this->companyId;
+	}
 
 }

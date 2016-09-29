@@ -55,70 +55,152 @@ class RecipientsListEntity extends BaseEntity {
      * @var LinkEntity 
      */
     private $company;
-    
-    public function getId() {
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
         return $this->id;
     }
 
-    public function getName() {
+    /**
+     * @param int $id
+     * @return RecipientsListEntity
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
         return $this->name;
     }
 
-    public function getRecipients() {
-        return $this->recipients;
-    }
-
-    public function getUnsubscribers() {
-        return $this->unsubscribers;
-    }
-
-    public function getFormVisible() {
-        return $this->formVisible;
-    }
-
-    public function getVariables() {
-        return $this->variables;
-    }
-
-    public function getCompany() {
-        return $this->company;
-    }
-
-    public function setId($id) {
-        $this->id = $id;
-    }
-
-    public function setName($name) {
+    /**
+     * @param string $name
+     * @return RecipientsListEntity
+     */
+    public function setName($name)
+    {
         $this->name = $name;
+        return $this;
     }
 
-    public function setRecipients($recipients) {
-        $this->recipients = $recipients;
-    }
-
-    public function setUnsubscribers($unsubscribers) {
-        $this->unsubscribers = $unsubscribers;
-    }
-
-    public function setFormVisible($formVisible) {
-        $this->formVisible = $formVisible;
-    }
-
-    public function setVariables($variables) {
-        $this->variables = $variables;
-    }
-
-    public function setCompany(LinkEntity $company) {
-        $this->company = $company;
-    }
-    
-    public function getDescription() {
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
         return $this->description;
     }
 
-    public function setDescription($description) {
+    /**
+     * @param string $description
+     * @return RecipientsListEntity
+     */
+    public function setDescription($description)
+    {
         $this->description = $description;
+        return $this;
     }
+
+    /**
+     * @return int
+     */
+    public function getRecipients()
+    {
+        return $this->recipients;
+    }
+
+    /**
+     * @param int $recipients
+     * @return RecipientsListEntity
+     */
+    public function setRecipients($recipients)
+    {
+        $this->recipients = $recipients;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getUnsubscribers()
+    {
+        return $this->unsubscribers;
+    }
+
+    /**
+     * @param int $unsubscribers
+     * @return RecipientsListEntity
+     */
+    public function setUnsubscribers($unsubscribers)
+    {
+        $this->unsubscribers = $unsubscribers;
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isFormVisible()
+    {
+        return $this->formVisible;
+    }
+
+    /**
+     * @param boolean $formVisible
+     * @return RecipientsListEntity
+     */
+    public function setFormVisible($formVisible)
+    {
+        $this->formVisible = $formVisible;
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getVariables()
+    {
+        return $this->variables;
+    }
+
+    /**
+     * @param array $variables
+     * @return RecipientsListEntity
+     */
+    public function setVariables($variables)
+    {
+        $this->variables = $variables;
+        return $this;
+    }
+
+    /**
+     * @return LinkEntity
+     */
+    public function getCompany()
+    {
+        return $this->company;
+    }
+
+    /**
+     * @param LinkEntity $company
+     * @return RecipientsListEntity
+     */
+    public function setCompany($company)
+    {
+        $this->company = $company;
+        return $this;
+    }
+    
+    
 
 
 

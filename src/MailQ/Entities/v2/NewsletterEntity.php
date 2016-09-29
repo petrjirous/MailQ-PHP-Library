@@ -147,191 +147,381 @@ class NewsletterEntity extends BaseEntity {
 	 */
 	private $text;
 
-    public function getId() {
-        return $this->id;
-    }
-
-    public function getName() {
-        return $this->name;
-    }
-
-    public function getCode() {
-        return $this->code;
-    }
-
-    public function getSubject() {
-        return $this->subject;
-    }
-
-    public function getSendAs() {
-        return $this->sendAs;
-    }
-
-    public function getSenderEmail() {
-        return $this->senderEmail;
-    }
-
-    public function getStatus() {
-        return $this->status;
-    }
-
-    public function getFrom() {
+	/**
+	 * @return null|string
+	 */
+	public function getFrom() {
 		if ($this->from != null) {
 			return $this->from->format('Y-m-d\TH:i:s.u');
 		}
 		else {
 			return null;
 		}
-    }
+	}
 
-    public function getTo() {
+	/**
+	 * @return null|string
+	 */
+	public function getTo() {
 		if ($this->to != null) {
 			return $this->to->format('Y-m-d\TH:i:s.u');
 		}
 		else {
 			return null;
 		}
-    }
-	
-	public function getFromAsDateTime() {
-        return $this->from;
-    }
+	}
 
-    public function getToAsDateTime() {
-        return $this->to;
-    }
+	/**
+	 * @param $from
+	 * @return NewsletterEntity
+	 */
+	public function setFrom($from) {
+		if (is_string($from)) {
+			$this->from = \DateTime::createFromFormat('Y-m-d\TH:i:s.u', $from);
+		} elseif ($from instanceof \DateTime) {
+			$this->from = $from;
+		}
+		return $this;
+	}
 
-    public function getAutomaticTime() {
-        return $this->automaticTime;
-    }
+	/**
+	 * @param $to
+	 * @return NewsletterEntity
+	 */
+	public function setTo($to) {
+		if (is_string($to)) {
+			$this->to = \DateTime::createFromFormat('Y-m-d\TH:i:s.u', $to);
+		} elseif ($to instanceof \DateTime) {
+			$this->to = $to;
+		}
+		return $this;
+	}
 
-    public function getRecipientsListId() {
-        return $this->recipientsListId;
-    }
+	/**
+	 * @return int
+	 */
+	public function getId()
+	{
+		return $this->id;
+	}
 
-    public function getCampaign() {
-        return $this->campaign;
-    }
+	/**
+	 * @param int $id
+	 * @return NewsletterEntity
+	 */
+	public function setId($id)
+	{
+		$this->id = $id;
+		return $this;
+	}
 
-    public function getAttachments() {
-        return $this->attachments;
-    }
+	/**
+	 * @return string
+	 */
+	public function getName()
+	{
+		return $this->name;
+	}
 
-    public function getCompany() {
-        return $this->company;
-    }
+	/**
+	 * @param string $name
+	 * @return NewsletterEntity
+	 */
+	public function setName($name)
+	{
+		$this->name = $name;
+		return $this;
+	}
 
-    public function setId($id) {
-        $this->id = $id;
-    }
+	/**
+	 * @return string
+	 */
+	public function getCode()
+	{
+		return $this->code;
+	}
 
-    public function setName($name) {
-        $this->name = $name;
-    }
+	/**
+	 * @param string $code
+	 * @return NewsletterEntity
+	 */
+	public function setCode($code)
+	{
+		$this->code = $code;
+		return $this;
+	}
 
-    public function setCode($code) {
-        $this->code = $code;
-    }
+	/**
+	 * @return string
+	 */
+	public function getSubject()
+	{
+		return $this->subject;
+	}
 
-    public function setSubject($subject) {
-        $this->subject = $subject;
-    }
+	/**
+	 * @param string $subject
+	 * @return NewsletterEntity
+	 */
+	public function setSubject($subject)
+	{
+		$this->subject = $subject;
+		return $this;
+	}
 
-    public function setSendAs($sendAs) {
-        $this->sendAs = $sendAs;
-    }
+	/**
+	 * @return string
+	 */
+	public function getSendAs()
+	{
+		return $this->sendAs;
+	}
 
-    public function setSenderEmail($senderEmail) {
-        $this->senderEmail = $senderEmail;
-    }
+	/**
+	 * @param string $sendAs
+	 * @return NewsletterEntity
+	 */
+	public function setSendAs($sendAs)
+	{
+		$this->sendAs = $sendAs;
+		return $this;
+	}
 
-    public function setStatus($status) {
-        $this->status = $status;
-    }
+	/**
+	 * @return string
+	 */
+	public function getSenderEmail()
+	{
+		return $this->senderEmail;
+	}
 
-    public function setFrom($from) {
-        if (is_string($from)) {
-            $this->from = \DateTime::createFromFormat('Y-m-d\TH:i:s.u', $from);
-        } elseif ($from instanceof \DateTime) {
-            $this->from = $from;
-        }
-    }
+	/**
+	 * @param string $senderEmail
+	 * @return NewsletterEntity
+	 */
+	public function setSenderEmail($senderEmail)
+	{
+		$this->senderEmail = $senderEmail;
+		return $this;
+	}
 
-    public function setTo($to) {
-        if (is_string($to)) {
-            $this->to = \DateTime::createFromFormat('Y-m-d\TH:i:s.u', $to);
-        } elseif ($to instanceof \DateTime) {
-            $this->to = $to;
-        }
-    }
+	/**
+	 * @return string
+	 */
+	public function getStatus()
+	{
+		return $this->status;
+	}
 
-    public function setAutomaticTime($automaticTime) {
-        $this->automaticTime = $automaticTime;
-    }
+	/**
+	 * @param string $status
+	 * @return NewsletterEntity
+	 */
+	public function setStatus($status)
+	{
+		$this->status = $status;
+		return $this;
+	}
 
-    public function setRecipientsListId($recipientsListId) {
-        $this->recipientsListId = $recipientsListId;
-    }
+	/**
+	 * @return boolean
+	 */
+	public function isAutomaticTime()
+	{
+		return $this->automaticTime;
+	}
 
-    public function setCampaign($campaign) {
-        $this->campaign = $campaign;
-    }
+	/**
+	 * @param boolean $automaticTime
+	 * @return NewsletterEntity
+	 */
+	public function setAutomaticTime($automaticTime)
+	{
+		$this->automaticTime = $automaticTime;
+		return $this;
+	}
 
-    public function setAttachments($attachments) {
-        $this->attachments = $attachments;
-    }
-
-    public function setCompany(LinkEntity $company) {
-        $this->company = $company;
-    }
-
-    public function getTemplateUrl() {
-        return $this->templateUrl;
-    }
-
-    public function getUnsubscribeTemplateUrl() {
-        return $this->unsubscribeTemplateUrl;
-    }
-
-    public function setTemplateUrl($templateUrl) {
-        $this->templateUrl = $templateUrl;
-    }
-
-    public function setUnsubscribeTemplateUrl($unsubscribeTemplateUrl) {
-        $this->unsubscribeTemplateUrl = $unsubscribeTemplateUrl;
-    }
-	
-	public function getUnlimited() {
+	/**
+	 * @return boolean
+	 */
+	public function isUnlimited()
+	{
 		return $this->unlimited;
 	}
 
-	public function getDataPersistence() {
+	/**
+	 * @param boolean $unlimited
+	 * @return NewsletterEntity
+	 */
+	public function setUnlimited($unlimited)
+	{
+		$this->unlimited = $unlimited;
+		return $this;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getRecipientsListId()
+	{
+		return $this->recipientsListId;
+	}
+
+	/**
+	 * @param int $recipientsListId
+	 * @return NewsletterEntity
+	 */
+	public function setRecipientsListId($recipientsListId)
+	{
+		$this->recipientsListId = $recipientsListId;
+		return $this;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getDataPersistence()
+	{
 		return $this->dataPersistence;
 	}
 
-	public function getCsvUrl() {
+	/**
+	 * @param int $dataPersistence
+	 * @return NewsletterEntity
+	 */
+	public function setDataPersistence($dataPersistence)
+	{
+		$this->dataPersistence = $dataPersistence;
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getCampaign()
+	{
+		return $this->campaign;
+	}
+
+	/**
+	 * @param string $campaign
+	 * @return NewsletterEntity
+	 */
+	public function setCampaign($campaign)
+	{
+		$this->campaign = $campaign;
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getCsvUrl()
+	{
 		return $this->csvUrl;
 	}
 
-	public function getText() {
+	/**
+	 * @param string $csvUrl
+	 * @return NewsletterEntity
+	 */
+	public function setCsvUrl($csvUrl)
+	{
+		$this->csvUrl = $csvUrl;
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getTemplateUrl()
+	{
+		return $this->templateUrl;
+	}
+
+	/**
+	 * @param string $templateUrl
+	 * @return NewsletterEntity
+	 */
+	public function setTemplateUrl($templateUrl)
+	{
+		$this->templateUrl = $templateUrl;
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getUnsubscribeTemplateUrl()
+	{
+		return $this->unsubscribeTemplateUrl;
+	}
+
+	/**
+	 * @param string $unsubscribeTemplateUrl
+	 * @return NewsletterEntity
+	 */
+	public function setUnsubscribeTemplateUrl($unsubscribeTemplateUrl)
+	{
+		$this->unsubscribeTemplateUrl = $unsubscribeTemplateUrl;
+		return $this;
+	}
+
+	/**
+	 * @return AttachmentEntity
+	 */
+	public function getAttachments()
+	{
+		return $this->attachments;
+	}
+
+	/**
+	 * @param AttachmentEntity $attachments
+	 * @return NewsletterEntity
+	 */
+	public function setAttachments($attachments)
+	{
+		$this->attachments = $attachments;
+		return $this;
+	}
+
+	/**
+	 * @return LinkEntity
+	 */
+	public function getCompany()
+	{
+		return $this->company;
+	}
+
+	/**
+	 * @param LinkEntity $company
+	 * @return NewsletterEntity
+	 */
+	public function setCompany($company)
+	{
+		$this->company = $company;
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getText()
+	{
 		return $this->text;
 	}
 
-	public function setUnlimited($unlimited) {
-		$this->unlimited = $unlimited;
-	}
-
-	public function setDataPersistence($dataPersistence) {
-		$this->dataPersistence = $dataPersistence;
-	}
-
-	public function setCsvUrl($csvUrl) {
-		$this->csvUrl = $csvUrl;
-	}
-
-	public function setText($text) {
+	/**
+	 * @param string $text
+	 * @return NewsletterEntity
+	 */
+	public function setText($text)
+	{
 		$this->text = $text;
+		return $this;
 	}
+
+
 
 
 

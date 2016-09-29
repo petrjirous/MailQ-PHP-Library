@@ -13,14 +13,26 @@ class LogMessagesEntity extends BaseEntity{
      * @collection
      */
     private $messages;
-    
-    
-    function getMessages() {
+
+    /**
+     * @return LogMessageEntity
+     */
+    public function getMessages()
+    {
         return $this->messages;
     }
 
-    function setMessages($messages) {
+    /**
+     * @param LogMessageEntity $messages
+     * @return LogMessagesEntity
+     */
+    public function setMessages($messages)
+    {
         $this->messages = $messages;
+        return $this;
     }
- 
+
+    
+
+
 }

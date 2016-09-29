@@ -2,27 +2,23 @@
 
 namespace MailQ\Resources;
 
+use DateTime;
 use MailQ\Entities\v2\EmailAddressesEntity;
 use MailQ\Entities\v2\UnsubscribersEntity;
 use MailQ\Request;
-use Nette\Utils\DateTime;
-use Nette\Utils\Json;
 use stdClass;
 
 trait UnsubscriberResource {
-    
 
-    
+
     /**
-     * 
-     * @param DateTime $from
+     * @param DateTime|null $from
      * @return UnsubscribersEntity
      */
-    public function getUnsubscribers(DateTime $from = null) {
+    public function getUnsubscribers(\DateTime $from = null) {
+        $parameters = [];
         if ($from != null) {
-            $parameters = [
-                'from' => $from->format('Y-m-d\TH:i:s.uP')
-            ];
+            $parameters['from'] = $from->format('Y-m-d\TH:i:s.uP');
         }
         $request = Request::get("{$this->getCompanyId()}/unsubscribers/",$parameters);
         $response = $this->getConnector()->sendRequest($request);

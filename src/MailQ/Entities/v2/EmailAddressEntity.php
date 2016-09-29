@@ -11,14 +11,26 @@ class EmailAddressEntity  extends BaseEntity {
      * @var string 
      */
     private $email;
-    
-    function getEmail() {
+
+    /**
+     * @return string
+     */
+    public function getEmail()
+    {
         return $this->email;
     }
 
-    function setEmail($email) {
+    /**
+     * @param string $email
+     * @return EmailAddressEntity
+     */
+    public function setEmail($email)
+    {
         $this->email = $email;
+        return $this;
     }
+    
+    
 
 
     

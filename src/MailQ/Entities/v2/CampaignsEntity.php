@@ -13,14 +13,24 @@ class CampaignsEntity extends BaseEntity {
      * @collection
      */
     private $campaigns;
-   
-    public function getCampaigns() {
+
+    /**
+     * @return CampaignEntity
+     */
+    public function getCampaigns()
+    {
         return $this->campaigns;
     }
 
-    public function setCampaigns($campaigns) {
+    /**
+     * @param CampaignEntity $campaigns
+     */
+    public function setCampaigns($campaigns)
+    {
         $this->campaigns = $campaigns;
     }
+   
+    
 
 
 }
