@@ -13,18 +13,38 @@ class Connector
 
 	private $baseUrl;
 
+	private $timeout = 0;
+
+	private $connectionTimeout = 300;
+
 	private static $instance;
 
-	function __construct($baseUrl, $apiKey)
+	/**
+	 * Connector constructor.
+	 * @param $baseUrl
+	 * @param $apiKey
+	 * @param int $connectionTimeout
+	 * @param int $timeout
+	 */
+	public function __construct($baseUrl, $apiKey, $connectionTimeout = 300, $timeout = 0)
 	{
 		$this->baseUrl = $baseUrl;
 		$this->apiKey = $apiKey;
+		$this->connectionTimeout = $connectionTimeout;
+		$this->timeout = $timeout;
 	}
 
-	public static function getInstance($baseUrl, $apiKey)
+	/**
+	 * @param $baseUrl
+	 * @param $apiKey
+	 * @param int $connectionTimeout
+	 * @param int $timeout
+	 * @return Connector
+	 */
+	public static function getInstance($baseUrl, $apiKey, $connectionTimeout = 300, $timeout = 0)
 	{
 		if (!isset(self::$instance)) {
-			self::$instance = new Connector($baseUrl, $apiKey);
+			self::$instance = new Connector($baseUrl, $apiKey,$connectionTimeout,$timeout);
 		}
 		return self::$instance;
 	}
@@ -55,6 +75,8 @@ class Connector
 		curl_setopt($ch, CURLOPT_HTTPHEADER, $curlHeaders);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
+		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT ,$this->connectionTimeout);
+		curl_setopt($ch, CURLOPT_TIMEOUT, $this->timeout);
 		if ($request->hasContent()) {
 			curl_setopt($ch, CURLOPT_POSTFIELDS, $request->getContent());
 		}
