@@ -27,7 +27,7 @@ class UnsubscriberEntity extends BaseEntity
 	 * @out
 	 * @var string
 	 */
-	private $unsubcribed;
+	private $unsubscribed;
 
 	/**
 	 * @in
@@ -89,18 +89,18 @@ class UnsubscriberEntity extends BaseEntity
 	/**
 	 * @return string
 	 */
-	public function getUnsubcribed()
+	public function getUnsubscribed()
 	{
-		return $this->unsubcribed;
+		return $this->unsubscribed;
 	}
 
 	/**
-	 * @param string $unsubcribed
+	 * @param string $unsubscribed
 	 * @return UnsubscriberEntity
 	 */
-	public function setUnsubcribed($unsubcribed)
+	public function setUnsubscribed($unsubscribed)
 	{
-		$this->unsubcribed = $unsubcribed;
+		$this->unsubscribed = $unsubscribed;
 		return $this;
 	}
 
