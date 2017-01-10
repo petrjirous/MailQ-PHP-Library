@@ -71,7 +71,7 @@ trait NotificationResource
 	 */
 	public function getNotificationData($notificationId, $notificationDataId)
 	{
-		$request = Request::post("{$this->getCompanyId()}/notifications/{$notificationId}/data/{$notificationDataId}");
+		$request = Request::get("{$this->getCompanyId()}/notifications/{$notificationId}/data/{$notificationDataId}");
 		$response = $this->getConnector()->sendRequest($request);
 		return new NotificationDataEntity($response->getContent());
 	}
@@ -84,7 +84,7 @@ trait NotificationResource
 	 */
 	public function getNotificationsData($notificationId, $email)
 	{
-		$request = Request::post("{$this->getCompanyId()}/notifications/{$notificationId}/history/{$email}");
+		$request = Request::get("{$this->getCompanyId()}/notifications/{$notificationId}/history/{$email}");
 		$response = $this->getConnector()->sendRequest($request);
 		$data = Json::decode($response->getContent());
 		$json = new stdClass();
