@@ -102,4 +102,15 @@ trait NewsletterResource
 		return new NewsletterEntity($response->getContent());
 	}
 
+	/**
+	 *
+	 * @param int $newsletterId
+	 * @return NewsletterEntity
+	 */
+	public function deleteNewsletter($newsletterId)
+	{
+		$request = Request::delete("{$this->getCompanyId()}/newsletters/{$newsletterId}");
+		$this->getConnector()->sendRequest($request);
+	}
+
 }
