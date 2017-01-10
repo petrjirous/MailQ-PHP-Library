@@ -132,7 +132,10 @@ trait RecipientListResource
 	{
 		$request = Request::get("{$this->getCompanyId()}/recipients-lists/{$recipientsListId}/recipients");
 		$response = $this->getConnector()->sendRequest($request);
-		return new RecipientEntity($response->getContent());
+		$data = Json::decode($response->getContent());
+		$json = new stdClass();
+		$json->recipients = $data;
+		return new RecipientsEntity($json);
 	}
 
 	/**
