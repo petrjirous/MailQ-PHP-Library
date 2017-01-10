@@ -7,6 +7,7 @@ use MailQ\Entities\v2\EmailAddressesEntity;
 use MailQ\Entities\v2\UnsubscribersEntity;
 use MailQ\Request;
 use stdClass;
+use Nette\Utils\Json;
 
 trait UnsubscriberResource {
 
