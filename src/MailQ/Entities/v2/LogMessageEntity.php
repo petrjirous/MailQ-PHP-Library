@@ -38,7 +38,7 @@ class LogMessageEntity extends BaseEntity
 	/**
 	 * @in
 	 * @out
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $created;
 
@@ -122,20 +122,36 @@ class LogMessageEntity extends BaseEntity
 	}
 
 	/**
-	 * @return string
+	 * @return null|string
 	 */
 	public function getCreated()
+	{
+		if ($this->created != null) {
+			return $this->created->format(DATE_ATOM);
+		} else {
+			return null;
+		}
+	}
+
+	/**
+	 * @return \DateTime
+	 */
+	public function getCreatedAsDateTime()
 	{
 		return $this->created;
 	}
 
 	/**
-	 * @param string $created
+	 * @param $created
 	 * @return LogMessageEntity
 	 */
 	public function setCreated($created)
 	{
-		$this->created = $created;
+		if (is_string($created)) {
+			$this->created = \DateTime::createFromFormat(DATE_ATOM, $created);
+		} elseif ($created instanceof \DateTime) {
+			$this->created = $created;
+		}
 		return $this;
 	}
 

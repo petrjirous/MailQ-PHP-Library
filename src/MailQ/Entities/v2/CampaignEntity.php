@@ -50,10 +50,18 @@ class CampaignEntity extends BaseEntity
 	public function getCreated()
 	{
 		if ($this->created != null) {
-			return $this->created->format('Y-m-d\TH:i:s.u');
+			return $this->created->format(DATE_ATOM);
 		} else {
 			return null;
 		}
+	}
+
+	/**
+	 * @return \DateTime
+	 */
+	public function getCreatedAsDateTime()
+	{
+		return $this->created;
 	}
 
 	/**
@@ -63,7 +71,7 @@ class CampaignEntity extends BaseEntity
 	public function setCreated($created)
 	{
 		if (is_string($created)) {
-			$this->created = \DateTime::createFromFormat('Y-m-d\TH:i:s.u', $created);
+			$this->created = \DateTime::createFromFormat(DATE_ATOM, $created);
 		} elseif ($created instanceof \DateTime) {
 			$this->created = $created;
 		}

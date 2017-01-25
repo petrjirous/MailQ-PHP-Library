@@ -37,11 +37,11 @@ class SmsEntity extends BaseEntity
 	private $state;
 
 	/**
-	 * @in
-	 * @out
-	 * @var string
+	 * @in sendTimestamp
+	 * @out sendTimestamp
+	 * @var \DateTime
 	 */
-	private $sendTimestamp;
+	private $sent;
 
 	/**
 	 * @in
@@ -122,21 +122,39 @@ class SmsEntity extends BaseEntity
 		return $this;
 	}
 
+
 	/**
-	 * @return string
+	 * @return null|string
 	 */
-	public function getSendTimestamp()
+	public function getSent()
 	{
-		return $this->sendTimestamp;
+		if ($this->sent != null) {
+			return $this->sent->format(DATE_ATOM);
+		} else {
+			return null;
+		}
 	}
 
 	/**
-	 * @param string $sendTimestamp
+	 * @return \DateTime
+	 */
+	public function getSentAsDateTime()
+	{
+		return $this->sent;
+	}
+
+
+	/**
+	 * @param $sent
 	 * @return SmsEntity
 	 */
-	public function setSendTimestamp($sendTimestamp)
+	public function setSent($sent)
 	{
-		$this->sendTimestamp = $sendTimestamp;
+		if (is_string($sent)) {
+			$this->sent = \DateTime::createFromFormat(DATE_ATOM, $sent);
+		} elseif ($sent instanceof \DateTime) {
+			$this->sent = $sent;
+		}
 		return $this;
 	}
 

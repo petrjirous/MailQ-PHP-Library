@@ -25,7 +25,7 @@ class UnsubscriberEntity extends BaseEntity
 	/**
 	 * @in
 	 * @out
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $unsubscribed;
 
@@ -85,22 +85,38 @@ class UnsubscriberEntity extends BaseEntity
 		$this->email = $email;
 		return $this;
 	}
-
+	
 	/**
-	 * @return string
+	 * @return null|string
 	 */
 	public function getUnsubscribed()
 	{
-		return $this->unsubscribed;
+		if ($this->unsubscribed != null) {
+			return $this->unsubscribed->format(DATE_ATOM);
+		} else {
+			return null;
+		}
 	}
 
 	/**
-	 * @param string $unsubscribed
-	 * @return UnsubscriberEntity
+	 * @return \DateTime
+	 */
+	public function getUnsubscribedAsDateTime() {
+		return $this->unsubscribed;
+	}
+
+
+	/**
+	 * @param $unsubscribed
+	 * @return NotificationDataEntity
 	 */
 	public function setUnsubscribed($unsubscribed)
 	{
-		$this->unsubscribed = $unsubscribed;
+		if (is_string($unsubscribed)) {
+			$this->unsubscribed = \DateTime::createFromFormat(DATE_ATOM, $unsubscribed);
+		} elseif ($unsubscribed instanceof \DateTime) {
+			$this->unsubscribed = $unsubscribed;
+		}
 		return $this;
 	}
 

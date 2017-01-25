@@ -14,23 +14,11 @@ class NotificationDataEntity extends BaseEntity {
      */
     private $id;
     /**
-     * @in
-     * @out
-     * @var integer 
+     * @in undeliveredTimestamp
+     * @out undeliveredTimestamp
+     * @var \DateTime
      */
-    private $openedTimestamp;
-    /**
-     * @in
-     * @out
-     * @var integer 
-     */
-    private $undeliveredTimestamp;
-    /**
-     * @in
-     * @out
-     * @var integer 
-     */
-    private $unsubscribedTimestamp;
+    private $undelivered;
     /**
      * @in
      * @out
@@ -87,59 +75,37 @@ class NotificationDataEntity extends BaseEntity {
         return $this;
     }
 
+
     /**
-     * @return int
+     * @return null|string
      */
-    public function getOpenedTimestamp()
+    public function getUndelivered()
     {
-        return $this->openedTimestamp;
+        if ($this->undelivered != null) {
+            return $this->undelivered->format(DATE_ATOM);
+        } else {
+            return null;
+        }
+    }
+
+    public function getUndeliveredAsDateTime() {
+        return $this->undelivered;
     }
 
     /**
-     * @param int $openedTimestamp
+     * @param $undelivered
      * @return NotificationDataEntity
      */
-    public function setOpenedTimestamp($openedTimestamp)
+    public function setUndelivered($undelivered)
     {
-        $this->openedTimestamp = $openedTimestamp;
+        if (is_string($undelivered)) {
+            $this->undelivered = \DateTime::createFromFormat(DATE_ATOM, $undelivered);
+        } elseif ($undelivered instanceof \DateTime) {
+            $this->undelivered = $undelivered;
+        }
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getUndeliveredTimestamp()
-    {
-        return $this->undeliveredTimestamp;
-    }
-
-    /**
-     * @param int $undeliveredTimestamp
-     * @return NotificationDataEntity
-     */
-    public function setUndeliveredTimestamp($undeliveredTimestamp)
-    {
-        $this->undeliveredTimestamp = $undeliveredTimestamp;
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getUnsubscribedTimestamp()
-    {
-        return $this->unsubscribedTimestamp;
-    }
-
-    /**
-     * @param int $unsubscribedTimestamp
-     * @return NotificationDataEntity
-     */
-    public function setUnsubscribedTimestamp($unsubscribedTimestamp)
-    {
-        $this->unsubscribedTimestamp = $unsubscribedTimestamp;
-        return $this;
-    }
 
     /**
      * @return string

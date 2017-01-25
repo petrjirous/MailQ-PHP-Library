@@ -152,11 +152,18 @@ class NewsletterEntity extends BaseEntity {
 	 */
 	public function getFrom() {
 		if ($this->from != null) {
-			return $this->from->format('Y-m-d\TH:i:s.u');
+			return $this->from->format(DATE_ATOM);
 		}
 		else {
 			return null;
 		}
+	}
+
+	/**
+	 * @return \DateTime
+	 */
+	public function getFromAsDateTime() {
+		return $this->from;
 	}
 
 	/**
@@ -164,7 +171,7 @@ class NewsletterEntity extends BaseEntity {
 	 */
 	public function getTo() {
 		if ($this->to != null) {
-			return $this->to->format('Y-m-d\TH:i:s.u');
+			return $this->to->format(DATE_ATOM);
 		}
 		else {
 			return null;
@@ -172,12 +179,20 @@ class NewsletterEntity extends BaseEntity {
 	}
 
 	/**
+	 * @return \DateTime
+	 */
+	public function getToAsDateTime() {
+		return $this->to;
+	}
+
+	/**
 	 * @param $from
 	 * @return NewsletterEntity
 	 */
-	public function setFrom($from) {
+	public function setFrom($from)
+	{
 		if (is_string($from)) {
-			$this->from = \DateTime::createFromFormat('Y-m-d\TH:i:s.u', $from);
+			$this->from = \DateTime::createFromFormat(DATE_ATOM, $from);
 		} elseif ($from instanceof \DateTime) {
 			$this->from = $from;
 		}
@@ -188,14 +203,16 @@ class NewsletterEntity extends BaseEntity {
 	 * @param $to
 	 * @return NewsletterEntity
 	 */
-	public function setTo($to) {
+	public function setTo($to)
+	{
 		if (is_string($to)) {
-			$this->to = \DateTime::createFromFormat('Y-m-d\TH:i:s.u', $to);
+			$this->to = \DateTime::createFromFormat(DATE_ATOM, $to);
 		} elseif ($to instanceof \DateTime) {
 			$this->to = $to;
 		}
 		return $this;
 	}
+
 
 	/**
 	 * @return int
