@@ -89,7 +89,7 @@ trait NotificationResource
 		$data = Json::decode($response->getContent());
 		$json = new stdClass();
 		$json->notifications = $data;
-		return new NotificationsDataEntity($response->getContent());
+		return new NotificationsDataEntity($json);
 	}
 
 
