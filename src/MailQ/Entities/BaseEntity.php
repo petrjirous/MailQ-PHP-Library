@@ -69,7 +69,7 @@ class BaseEntity extends \Nette\Object {
             if ($property->hasAnnotation($mapping)) {
                 $annotation = $property->getAnnotation($mapping);
                 if ($annotation !== true) {
-                    $this->attributeNames[$annotation->name] = $property->getName();
+                    $this->attributeNames[$annotation] = $property->getName();
                 } else {
                     $this->attributeNames[$property->getName()] = $property->getName();
                 }
