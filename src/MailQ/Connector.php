@@ -143,12 +143,12 @@ class Connector
 	{
 		// TODO change to resolving messages by errorCode
 		if ($errorData->message === 'Could not resolve MX domain.') {
-			throw new UnresolvedMxDomainException($errorData->message, $errorData->code);
+			throw new UnresolvedMxDomainException($errorData->message, isset($errorData->code) ? $errorData->code : 0);
 		} else {
 			if ($errorData->message === 'Invalid recipient email.') {
-				throw new InvalidEmailAddressException($errorData->message, $errorData->code);
+				throw new InvalidEmailAddressException($errorData->message, isset($errorData->code) ? $errorData->code : 0);
 			} else {
-				throw new MailQException($errorData->message, $errorData->code);
+				throw new MailQException($errorData->message, isset($errorData->code) ? $errorData->code : 0);
 			}
 		}
 	}
