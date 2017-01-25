@@ -13,7 +13,7 @@ Add this section to your config. You should use different URL and API key for de
 
 ## Usage
 There is MailQ object which is facade to whole MailQ REST API. Most common use case is only one company in MailQ per customer. You need to instantiate MailQ object with company ID. Because there are also customers with multiple companies there is MailQFactory which creates MailQ for specific company.
- 
+
 ```php
 $apiKey = "6e2211bf472a9478f03420fb5897e324c57d05fc27bc0e871083275e98eec344";
 $apiUrl = "http://mailq-test.quanti.cz/api/v2";
@@ -52,7 +52,7 @@ $company = $mailq->getCompany();
 
 #### Regenerate API key
 
-Use this with caution! After regenerating API key application will throw errors because you have already create connection 
+Use this with caution! After regenerating API key application will throw errors because you have already create connection
 
 ```php
 $apiKey = $mailq->regenerateApiKey();
@@ -85,8 +85,8 @@ $data = [
      "subject" => "Buy our new product",
      "senderEmail" => "newsletter@example.org",
      "sendAs" => "Awesome Company",
-     "from" => "2015-06-12T06:00:00.000",
-     "to" => "2016-06-19T06:00:00.000",
+     "from" => "2015-06-12T06:00:00+01:00",
+     "to" => "2016-06-19T06:00:00+01:00",
      "text"=> "QWx0ZXJuYXRpdmUgYmFzZTY0IGVtYWlsIHRleHQ=",
      "automaticTime"=> false,
      "recipientsListId"=>1,
@@ -206,13 +206,13 @@ $mailq->deleteNotification($notificationId);
 
 #### Send notification e-mail
 
-In data section are all values which will be used in notification. Keys of associative array are variable names and values are values. 
+In data section are all values which will be used in notification. Keys of associative array are variable names and values are values.
 
 ```php
 $data = [
     "recipientEmail" => "recipient@example.org",
     "data" => [
-        "key1" => "value1", 
+        "key1" => "value1",
         "key2" => "value2"
     ],
     "attachments" => [
@@ -231,7 +231,7 @@ $data = [
     ]
 ];
 $notificationId = 1;
-$notificationData = new \MailQ\Entities\v2\NotificationDataEntity($data); 
+$notificationData = new \MailQ\Entities\v2\NotificationDataEntity($data);
 $mailq->sendNotificationEmail($notificationData,$notificationId);
 $notificationDataId = $notificationData->getId();
 ```
@@ -433,7 +433,7 @@ $smsNotificationId = 1;
 $data = [
 	"toNumber" => "+420123456789",
     "data" => [
-        "key1" => "value1", 
+        "key1" => "value1",
         "key2" => "value2"
     ]
 ];
@@ -450,14 +450,14 @@ $data = [
 	"batch" => [
         [    
             "id" => 1,
-            "toNumber" => "+420123456789", 
+            "toNumber" => "+420123456789",
             "data" => [         
                 "text" => "value1"   
             ]
         ],
         [     
             "id" => 2,
-            "toNumber" => "+420123456789", 
+            "toNumber" => "+420123456789",
             "data" => [        
                 "text" => "value2"   
             ]
