@@ -67,6 +67,24 @@ class CompanyEntity extends BaseEntity
 	private $recipientsLists;
 
 	/**
+	 * @return int
+	 */
+	public function getId()
+	{
+		return $this->id;
+	}
+
+	/**
+	 * @param int $id
+	 * @return CompanyEntity
+	 */
+	public function setId($id)
+	{
+		$this->id = $id;
+        	return $this;
+	}	
+	
+	/**
 	 * @return string
 	 */
 	public function getName()
