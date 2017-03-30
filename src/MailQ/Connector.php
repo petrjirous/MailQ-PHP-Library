@@ -26,7 +26,7 @@ class Connector
 	 * @param int $connectionTimeout
 	 * @param int $timeout
 	 */
-	public function __construct($baseUrl, $apiKey, $connectionTimeout = 300, $timeout = 0)
+	private function __construct($baseUrl, $apiKey, $connectionTimeout = 300, $timeout = 0)
 	{
 		$this->baseUrl = $baseUrl;
 		$this->apiKey = $apiKey;
@@ -43,7 +43,7 @@ class Connector
 	 */
 	public static function getInstance($baseUrl, $apiKey, $connectionTimeout = 300, $timeout = 0)
 	{
-	    $instanceId = $baseUrl . '|' . $apiKey . '|' . $connectionTimeout . '|' . $timeout;
+	    $instanceId = join('|', [$baseUrl, $apiKey, $connectionTimeout, $timeout]);
 	    if (!isset(self::$instances[$instanceId])) {
 	        self::$instances[$instanceId] = new Connector($baseUrl, $apiKey,$connectionTimeout,$timeout);
         }
