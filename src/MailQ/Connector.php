@@ -17,7 +17,7 @@ class Connector
 
 	private $connectionTimeout = 300;
 
-	private static $instance;
+	private static $instances = [];
 
 	/**
 	 * Connector constructor.
@@ -43,10 +43,11 @@ class Connector
 	 */
 	public static function getInstance($baseUrl, $apiKey, $connectionTimeout = 300, $timeout = 0)
 	{
-		if (!isset(self::$instance)) {
-			self::$instance = new Connector($baseUrl, $apiKey,$connectionTimeout,$timeout);
-		}
-		return self::$instance;
+	    $instanceId = $baseUrl . '|' . $apiKey . '|' . $connectionTimeout . '|' . $timeout;
+	    if (!isset(self::$instances[$instanceId])) {
+	        self::$instances[$instanceId] = new Connector($baseUrl, $apiKey,$connectionTimeout,$timeout);
+        }
+		return self::$instances[$instanceId];
 	}
 
 	/**
