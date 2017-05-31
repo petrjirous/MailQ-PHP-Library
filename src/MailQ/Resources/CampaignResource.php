@@ -19,10 +19,7 @@ trait CampaignResource
 	{
 		$request = Request::get("{$this->getCompanyId()}/campaigns");
 		$response = $this->getConnector()->sendRequest($request);
-		$data = Json::decode($response->getContent());
-		$json = new stdClass();
-		$json->campaigns = $data;
-		return new CampaignsEntity($json);
+		return new CampaignsEntity($response->getContent());
 	}
 
 	/**
