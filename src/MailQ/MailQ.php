@@ -2,6 +2,7 @@
 
 namespace MailQ;
 
+use MailQ\Resources\CampaignResource;
 use MailQ\Resources\CompanyResource;
 use MailQ\Resources\LogMessageResource;
 use MailQ\Resources\NewsletterResource;
@@ -15,7 +16,8 @@ use MailQ\Resources\UserResource;
 class MailQ
 {
 
-	use CompanyResource,
+	use CampaignResource,
+		CompanyResource,
 		LogMessageResource,
 		NewsletterResource,
 		NotificationResource,
