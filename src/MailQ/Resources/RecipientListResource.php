@@ -28,7 +28,7 @@ trait RecipientListResource
 		$parameters = [
 			'dont-validate' => !$validate,
 		];
-		$request = Request::post("{$this->getCompanyId()}/recipients-lists/{$recipientsListId}", $parameters);
+		$request = Request::post("{$this->getCompanyId()}/recipients-lists/{$recipientsListId}/recipients", $parameters);
 		$data = $recipients->toArray();
 		$json = Json::encode($data['recipients']);
 		$request->setContent($json);
